@@ -1,0 +1,27 @@
+work-3
+import cv2
+import os
+
+video_path="/content/Superhero_Video_Creation_Request.mp4"
+
+output_folder="frames"
+
+os.makedirs(output_folder,exist_ok=True)
+
+cap=cv2.VideoCapture("/content/Superhero_Video_Creation_Request.mp4")
+
+if not cap.isOpened():
+  print("error opening video file")
+  exit()
+frame_count=0
+while True:
+  ret,frame=cap.read()
+  if not ret:
+    break
+  frame_filename = os.path.join(output_folder, f"frame_{frame_count:04d}.jpg")
+  cv2.imwrite(frame_filename, frame)
+  print(f"saved frame {frame_count}")
+  frame_count+=1
+
+cap.release()
+cv2.destroyAllWindows()
