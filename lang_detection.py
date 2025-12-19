@@ -1,6 +1,6 @@
 from groq import Groq
 
-client = Groq(api_key="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")
+client = Groq(api_key="GROQ_API_KEY")
 
 
 def transcribe_and_detect_language(file_path):
@@ -58,3 +58,4 @@ if __name__ == "__main__":
             print(language_llm)
 
             print("\n----------------------------------------\n")
+
