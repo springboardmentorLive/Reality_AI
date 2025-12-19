@@ -4,7 +4,7 @@ from groq import Groq
 # from audio import record # Not using this directly as we need custom duration
 
 # Setup Groq Client
-client = Groq(api_key="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")
+client = Groq(api_key="GROQ_API_KEY")
 
 st.set_page_config(page_title="Live Meeting Summarizer", layout="wide")
 st.title("📝 Live Meeting Summarizer")
@@ -221,3 +221,4 @@ if audio_source == "Live Microphone" and st.session_state.is_recording:
             
         # Rerun to continue the loop and update UI
         st.rerun()
+
