@@ -1,6 +1,6 @@
 from groq import Groq
 
-client = Groq(api_key="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")
+client = Groq(api_key="GROQ_API_KEY")
 
 def ask_bot(prompt):
     response = client.chat.completions.create(
@@ -19,3 +19,4 @@ while True:
         print("Bot: Goodbye!")
         break
     print("Bot:", ask_bot(user))
+
