@@ -1,6 +1,6 @@
 from groq import Groq
 
-client = Groq(api_key="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")
+client = Groq(api_key="GROQ_API_KEY")
 
 def ask_bot(theme, style):
     response = client.chat.completions.create(
@@ -34,3 +34,4 @@ while True:
     print("\n--- Your Poem ---\n")
     print(ask_bot(theme, style))
     print("\n------------------\n")
+
