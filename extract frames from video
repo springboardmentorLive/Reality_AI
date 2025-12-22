@@ -1,0 +1,107 @@
+import cv2 #- cv2: Imports OpenCV, a powerful library for image and video processing.
+import os
+# Path to your video file
+video_path = "/content/AIVideo.mp4"
+# Folder to save extracted frames
+output_folder = "frames"
+# Create the folder if it doesn't exist
+os.makedirs(output_folder, exist_ok=True)
+# Load the video
+cap = cv2.VideoCapture("/content/AIVideo.mp4")
+# Check if video opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
+frame_count = 0
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break  # End of video
+    # Save frame as image
+    frame_filename = os.path.join(output_folder, f"frame_{frame_count:03d}.jpg")
+    cv2.imwrite(frame_filename, frame)
+    print(f"Saved {frame_filename}")
+    frame_count += 1
+# Release resources
+cap.release()
+cv2.destroyAllWindows()
+_____
+#same framing code for exact number of frams 
+import cv2
+import os
+# Path to your video file
+video_path = "/content/AIVideo (1).mp4"
+# Folder to save extracted frames
+output_folder = "frames"
+os.makedirs(output_folder, exist_ok=True)
+# Load the video
+cap = cv2.VideoCapture(video_path)
+# Check if video opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
+frame_count = 0
+max_frames = 10  # only want 10 images
+while frame_count < max_frames:
+    ret, frame = cap.read()
+    if not ret:
+        break  # End of video
+    # Save frame as image
+    frame_filename = os.path.join(output_folder, f"frame_{frame_count:03d}.jpg")
+    cv2.imwrite(frame_filename, frame)
+    print(f"Saved {frame_filename}")
+    frame_count += 1
+# Release resources
+cap.release()
+cv2.destroyAllWindows()
+print("Extracted 10 frames successfully.")
+------
+#diplay the frames on output window 
+import cv2
+import os
+from IPython.display import Image, display
+
+#  Path to your video file
+video_path = "/content/AIVideo.mp4"
+
+#  Folder to save extracted frames
+output_folder = "/content/frames"
+os.makedirs(output_folder, exist_ok=True)
+
+#  Load the video
+cap = cv2.VideoCapture(video_path)
+
+#  Check if video opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
+
+frame_count = 0
+max_frames = 10  # Only extract 10 images
+
+#  Loop through video and save first 10 frames
+while frame_count < max_frames:
+    ret, frame = cap.read()
+    if not ret:
+        break  # End of video
+
+    # Save frame as image
+    frame_filename = os.path.join(output_folder, f"frame_{frame_count:03d}.jpg")
+    cv2.imwrite(frame_filename, frame)
+    print(f"Saved {frame_filename}")
+
+    frame_count += 1
+
+#  Release resources
+cap.release()
+cv2.destroyAllWindows()
+print(" Extracted 10 frames successfully.")
+# List saved images in the frames folder
+print("\nSaved images:")
+print(os.listdir(output_folder))
+
+# Display all extracted frames
+for i in range(10):
+    frame_path = os.path.join(output_folder, f"frame_{i:03d}.jpg")
+    if os.path.exists(frame_path):
+        display(Image(filename=frame_path))
