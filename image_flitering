@@ -1,0 +1,73 @@
+#image flitring 
+from PIL import Image, ImageFilter
+import matplotlib.pyplot as plt
+# Opens a image in RGB mode
+im = Image.open("flower.jpg")
+# Blurring the image
+im1 = im.filter(ImageFilter.BoxBlur(2))
+# Shows the image in image viewer
+plt.imshow(im1)
+plt.title("Blurred Image")
+plt.axis('off')
+---
+#2
+from PIL import Image, ImageFilter
+import matplotlib.pyplot as plt
+
+# Opens a image in RGB mode
+im = Image.open(r"flower.jpg")
+
+# Blurring the image
+im1 = im.filter(ImageFilter.BoxBlur(2))
+# Shows the image in image viewer
+plt.imshow(im1)
+---
+#3
+from PIL import Image, ImageFilter
+import matplotlib.pyplot as plt
+
+
+# Opens a image in RGB mode
+im = Image.open(r"flower.jpg")
+
+# Blurring the image
+im1 = im.filter(ImageFilter.BoxBlur(2))
+
+# Shows the image in image viewer
+
+plt.imshow(im1)
+plt.axis('off')  # Hide axis
+plt.title("Blurred Image")
+plt.show()
+----
+#4
+from PIL import Image, ImageEnhance
+import matplotlib.pyplot as plt
+# Open the image
+im = Image.open("flower.jpg").convert("RGB")
+# Create a solid color image (same size)
+blue_tint = Image.new("RGB", im.size, (255, 0, 255))  # Pure blue
+# Blend the original with the blue tint
+tinted = Image.blend(im, blue_tint, alpha=0.5)  # Adjust alpha for intensity
+# Display the result
+plt.imshow(tinted)
+plt.axis('off')
+plt.title("Blue-Tinted Image")
+plt.show()
+----
+from PIL import Image
+import matplotlib.pyplot as plt
+
+im = Image.new("RGB", (100, 100), color="green")
+plt.imshow(im)
+plt.axis('off')
+plt.title("Test Image")
+plt.show()
+
+
+
+
+
+
+
+
