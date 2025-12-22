@@ -1,0 +1,583 @@
+library___using no need code from the screech 
+
+lib---numpy,pandas,matplot
+
+text,image, video,numbers---data
+
+ type
+------
+struct--data in table form----labled 
+unstruct---video and audio---unlable 
+
+100% data
+traing-80%
+test--20%
+ 
+DataFrame ---it is a method covert data easy to table form--its is in the pandas lib --.merge also is in there to merge the data frames 
+
+google colab--no need to downlode any labrerys so we ues it
+
+keys are unique but in the values are is duplicate is ok
+
+key:[1,2,3]
+a:[1,2,3]
+
+merge--values left right outer inner  attributes   
+
+
+day-2
+------
+data cleaning and processiong-
+where we give none it give  Nan
+isna--method where Nan it shows true 
+df.sum--it chick column to the sume how many true(none)are there 
+dropna--remove were the nan id drop antier delete rows
+df.dropna(axis=1/true)--remove the column
+
+take particular rows/column---useing subset
+at method---change the data based on we update data
+fillna method---it fill the nan values are fill with some values
+mean/median/mode=---average,medial,frequently repedatly values
+
+rename --rename the rows and columns 
+upper/lower methods to convert upper and lower
+pd.read_csv()--create a csv file u
+
+day-3
+------
+iloc method is used to update particular values it is not applicable in strings 
+
+fillna method where the nan values it fill
+"inplace-directly change the position if we give false it not change"
+dropna--delete the rows
+drop_duplicates()--get the data in original values 
+finding null values we us isnull() method
+
+
+linear regrasion--it is supervised ml algo it is relation between dependent(target) and independent(feature) variable 
+sklearn.model_selection it is a module
+
+day--5
+------
+
+classification---categoricale label for given input based on output
+logistic regression--algo used in classification ---yes/no,,0/1,,spam/not spam,,disease/not disease
+shyffle--values is shuffle 
+random_state 
+
+open--method is used to store image--it is in image library 
+img.save-method--based on the name it diplay 
+PIL-python image library
+resize--to reduse our img size
+"l--lumine
+
+clustering---grouping the data we dont no the output
+head()--for seeing the output represent first 5 rows of the dataset
+normalization--each row tack one one value ( range with in 0/1)--conver the data in the form of in b/w 0/1
+
+dendrogram--number of clusters-=- pictorial format
+
+21-11-2025
+----------
+image grayscale(black, white)
+skimage---module use tack the data lib to chancge color--skimage.color
+figure--how match width and hight we want
+imshow()--to displaying
+subplot(1,2,1)--row,column,start
+hsv--hue saturation value 
+
+25-11-2525
+-----------
+numpy--perform numerical operations 
+
+dtype--numeric into strings universal type --covert into numaric
+array-1d,2d,multi d,size--how many elements are there 
+  shape--how many rows and columns in that array
+formit--covert string to int
+arrange--to arrange the numbers according to our useage 
+sort--arrange the elements 
+concatenate --combainimng
+iterable--inteable elements multiplication
+range 
+
+26-11-2025
+----------
+stack()---it is ds to use store the values sequens of elements multipul numpy arrays in to combain values in sequence order  
+hstack--horizontal stack 
+vstack---vertical stack
+dstack--dimentions of the stack 
+arra_split--split the guve data into array form
+a1=np.array([1,2,3])
+a2=np.array([4,5,6])
+x=np.dstack((a1,a2))
+print(x)
+
+visuvalization
+----
+pandas 
+matplotlib--library
+for visuvalization 
+list(time_data.keys())--to access the keys 
+
+
+label--it is the attribute that we use the 
+append --adding
+series method it give random and also random.rand we use 
+
+''''''''''
+area---it show the area of the graph
+
+hist,box,area,barh,bar,pie--different grah 
+kde=--kernel density estimation --non peramitarized -- curve line representation 
+density=continues,perfect shape data,,line--graphe this are presented methods in matplotlib  
+
+
+1.dataset create with duplicate entryes and identify it remove duplecat        
+rows from the dataset --visuvalaize the actuval graph min 5
+---duplicate entry values ,duplicate values is visuvalize and then clean data 
+ditact the duplicate and drop 
+
+---------
+
+1.	Write a Python program that performs the following tasks:
+data = {
+    'Name': ['Riya', 'Karan', None, 'Meena', 'Amit', None, 'Sneha', 'Vikas', 'Neha', 'Tina'],
+    'Age': [28, 30, 22, None, 26, 21, None, 24, 29, None],
+    'Gender': ['F', 'M', 'M', 'F', 'M', 'M', 'F', 'M', 'F', 'F'],
+    'Score': [91, None, 76, 84, 89, 95, None, 88, 93, 90]
+}
+•	Store this dataset into a CSV file named raw_data.csv.
+•	Read the first 5 rows of the data from raw_data.csv using pandas.
+•	Drop rows with any missing values.
+•	Count the number of missing values in each column.
+•	Fill missing values in the Name column with "some name" and in the Age column with 21.
+•	Save the cleaned dataset into a new CSV file named cleaned_data.csv.
+
+
+image segmentation--
+CV--computer vision to work on video and audio files 
+
+tack our own data and convert it csv and delete wharer none values and print updated data 
+
+-----
+
+gitgub-- downlode git 
+
+https://github.com/springboardmentorLive/Reality_AI.git
+
+$git colone"https://github.com/springboardmentorLive/Reality_AI.git"
+
+-------
+program on image segmentation 
+original image and read to in the out put and perform operations on the image 
+
+detact
+get only specific object in a image or videos 
+
+
+
+
+
+import torch
+import torchvision
+from torchvision.transforms import functional as F
+from torchvision.models.detection import FasterRCNN_ResNet50_FPN_Weights
+import cv2
+
+# ------------------------------
+# Load model with updated API
+# ------------------------------
+weights = FasterRCNN_ResNet50_FPN_Weights.DEFAULT
+model = torchvision.models.detection.fasterrcnn_resnet50_fpn(weights=weights)
+model.eval()
+
+# Load COCO labels
+labels = weights.meta["categories"]
+
+# ------------------------------
+# Load image
+# ------------------------------
+img_path = "test1.jpg"   # change this
+image = cv2.imread(img_path)
+orig = image.copy()
+
+# Convert to RGB and tensor
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+tensor = F.to_tensor(image_rgb)
+tensor = tensor.unsqueeze(0)
+
+# ------------------------------
+# Run detection
+# ------------------------------
+with torch.no_grad():
+    predictions = model(tensor)
+
+boxes = predictions[0]["boxes"]
+scores = predictions[0]["scores"]
+classes = predictions[0]["labels"]
+
+# ------------------------------
+# Draw boxes
+# ------------------------------
+for box, score, cls in zip(boxes, scores, classes):
+    if score < 0.5:  # confidence threshold
+        continue
+
+    x1, y1, x2, y2 = box.int().tolist()
+    label = f"{labels[cls]}: {score:.2f}"
+
+    cv2.rectangle(orig, (x1, y1), (x2, y2), (0, 255, 0), 2)
+    cv2.putText(orig, label, (x1, y1 - 5),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+
+# ------------------------------
+# Show result
+# ------------------------------
+cv2.imshow("Detection", orig)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+py -m pip install torch torchvision opencv-python
+py pytorch_detect.py
+
+
+--------
+
+what is WER--word error Rate
+ use in speech recognition(ASR) --how accurate model trancilate 
+
+WER=S+D+I/N
+
+substitution(wrong words)
+D=deletion(missing words)
+I=insertion(extra words)
+N=total words
+
+
+
+----
+streming-- cutting edigs  process
+nltk--wordNetLemmatizer
+
+
+'''''
+chat bots--in real time some companys use this 
+
+
+we ask differ type it give same answers 
+
+crate chatbots in differ ways and give differ outputs 
+
+''''''
+API key 
+LLMs-large language model train huge amount of the text date 
+      chat like humanes 
+chat bot,resume monitering ,web ser
+open ai modles-chatgpt,
+groq--library using this in LLAM -3.3-70b-versatile-we create 
+local models like hugging pahase 
+
+usinig transformares --selfe attection understanding --brain of llms 
+
+socia media contant creater and contant writer ,helthe care chat bot 
+
+
+
+You are a helpful HEALTH-CARE chatbot.
+You must answer ONLY health-related queries such as:
+- symptoms info
+- disease awareness
+- diet & nutrition guidance
+- fitness & lifestyle tips
+- mental wellness suggestions
+- first-aid awareness
+- precautions
+
+Rules:
+- DO NOT give medical prescriptions.
+- DO NOT give doses of medicines.
+- DO NOT give emergency decisions.
+- If user asks serious or emergency issues, advise them to consult a doctor immediately.
+
+
+----
+
+using language ditaction&identifing multipulw naguages  -we uplode/are talk to that bot then it identify the which language it is
+
+
+
+doing lan translater and detacter project for detacting language and the using fronted apply to that process--15-12-2025
+----py torch uingfor deeplearing and using nlps
+
+''''
+livemeeting summery 
+---using stremlet 
+
+----
+17-12-25
+------------------
+import pandas as pd
+import numpy as np
+from zipfile import ZipFile
+import tensorflow as tf
+from tensorflow import keras
+from pathlib import Path
+import matplotlib.pyplot as plt
+---
+movielens_data_file_url = (
+    "http://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
+)
+
+movielens_zipped_file = keras.utils.get_file(
+    "ml-latest-small.zip", movielens_data_file_url, extract=False
+)
+
+keras_datasets_path = Path(movielens_zipped_file).parents[0]
+movielens_dir = keras_datasets_path / "ml-latest-small"
+
+# Only extract the data the first time the script is run.
+if not movielens_dir.exists():
+    with ZipFile(movielens_zipped_file, "r") as zip:
+        # Extract files
+        print("Extracting all the files now...")
+        zip.extractall(path=keras_datasets_path)
+        print("Done!")
+
+ratings_file = movielens_dir / "ratings.csv"
+tags_file = movielens_dir / "tags.csv"
+movies_file = movielens_dir / "movies.csv"
+
+df = pd.read_csv(ratings_file)
+tags = pd.read_csv(tags_file)
+movies = pd.read_csv(movies_file)
+df.head()
+df.describe()
+df.info()
+--
+# Map user ID to a "user vector" via an embedding matrix
+user_ids = df["userId"].unique().tolist()
+user2user_encoded = {x: i for i, x in enumerate(user_ids)}
+userencoded2user = {i: x for i, x in enumerate(user_ids)}
+
+# Map movies ID to a "movies vector" via an embedding matrix
+movie_ids = df["movieId"].unique().tolist()
+movie2movie_encoded = {x: i for i, x in enumerate(movie_ids)}
+movie_encoded2movie = {i: x for i, x in enumerate(movie_ids)}
+
+df["user"] = df["userId"].map(user2user_encoded)
+df["movie"] = df["movieId"].map(movie2movie_encoded)
+
+num_users = len(user2user_encoded)
+num_movies = len(movie_encoded2movie)
+df['rating'] = df['rating'].values.astype(np.float32)
+
+# min and max ratings will be used to normalize the ratings later
+min_rating = min(df["rating"])
+max_rating = max(df["rating"])
+
+print(f"Number of users: {num_users}, Number of Movies: {num_movies}, Min Rating: {min_rating}, Max Rating: {max_rating}")
+df = df.sample(frac=1, random_state=42)
+x = df[["user", "movie"]].values
+
+# Normalizing the targets between 0 and 1. Makes it easy to train.
+y = df["rating"].apply(lambda x: (x - min_rating) / (max_rating - min_rating)).values
+
+# Assuming training on 90% of the data and validating on 100%
+train_indices = int(0.9 * df.shape[0])
+x_train, x_val, y_train, y_val = (
+    x[:train_indices],
+    x[train_indices:],
+    y[:train_indices],
+    y[train_indices:],
+)
+----
+EMBEDDING_SIZE = 50
+
+class RecommenderNet(keras.Model):
+    def __init__(self, num_users, num_movies, embedding_size, **kwargs):
+        super(RecommenderNet, self).__init__(**kwargs)
+        self.num_users = num_users
+        self.num_movies = num_movies
+        self.embedding_size = embedding_size
+        self.user_embedding = layers.Embedding(
+            num_users,
+            embedding_size,
+            embeddings_initializer="he_normal",
+            embeddings_regularizer=keras.regularizers.l2(1e-6),
+        )
+        self.user_bias = layers.Embedding(num_users, 1)
+        self.movie_embedding = layers.Embedding(
+            num_movies,
+            embedding_size,
+            embeddings_initializer="he_normal",
+            embeddings_regularizer=keras.regularizers.l2(1e-6)
+        )
+        self.movie_bias = layers.Embedding(num_movies, 1)
+
+    def call(self, inputs):
+        user_vector = self.user_embedding(inputs[:, 0])
+        user_bias = self.user_bias(inputs[:, 0])
+        movie_vector = self.movie_embedding(inputs[:, 1])
+        movie_bias = self.movie_bias(inputs[:, 1])
+        dot_user_movie = tf.tensordot(user_vector, movie_vector, 2)
+        # Add all the components (including bias)
+        x = dot_user_movie + user_bias + movie_bias
+        # The sigmoid activation forces the rating to be between 0 and 11
+        return tf.nn.sigmoid(x)
+
+model = RecommenderNet(num_users, num_movies, EMBEDDING_SIZE)
+model.compile(
+    loss=tf.keras.losses.BinaryCrossentropy(),
+    optimizer=keras.optimizers.Adam(learning_rate=0.001) # Changed 'lr' to 'learning_rate'
+)
+
+
+---
+18-12-2025
+----
+price prediction of house 
+do project like score prediction 
+
+
+
+---19-12-2025
+------
+
+1. House Rent Prediction
+What it does
+•	Predict monthly rent based on:
+o	Location
+o	Size (sq ft)
+o	BHK
+o	Furnished / Unfurnished
+ML Model
+•	Linear Regression / Random Forest
+Streamlit UI
+•	Sliders for size & BHK
+•	Dropdown for location
+•	Button → Predict Rent
+________________________________________
+ 2. Student Performance Prediction
+What it does
+•	Predict student pass/fail or marks
+Inputs
+•	Study hours
+•	Attendance
+•	Internal marks
+Model
+•	Logistic Regression (Pass/Fail)
+•	Linear Regression (Marks)
+Why good?
+•	Very common college-level project
+•	Easy to explain in viva
+________________________________________
+ 3. Loan Approval Prediction
+What it does
+•	Predict whether a loan will be approved
+Inputs
+•	Income
+•	Credit score
+•	Loan amount
+•	Employment type
+Model
+•	Decision Tree / Logistic Regression
+Extra
+•	Display “Approved / Rejected” with confidence %
+________________________________________
+ 4. Fake News Detection App
+What it does
+•	Detect whether news is Real or Fake
+Tech Stack
+•	NLP (TF-IDF / CountVectorizer)
+•	Naive Bayes / Logistic Regression
+Streamlit UI
+•	Text box for news input
+•	Button → Check Authenticity
+________________________________________
+ 5. Sentiment Analysis App
+What it does
+•	Analyze sentiment of:
+o	Reviews
+o	Tweets
+o	Feedback
+Output
+•	Positive 😊
+•	Neutral 😐
+•	Negative 😠
+Model
+•	NLP + Logistic Regression
+________________________________________
+ 6. Medical Disease Prediction
+Example
+•	Diabetes / Heart Disease
+Inputs
+•	Age
+•	BMI
+•	Blood pressure
+•	Glucose
+Model
+•	Random Forest / SVM
+ Add disclaimer in UI: “For educational purposes only”
+________________________________________
+ 7. Resume Screening System
+What it does
+•	Upload resume (PDF/Text)
+•	Predict job role:
+o	Data Scientist
+o	Java Developer
+o	Web Developer
+Tech
+•	NLP + ML
+•	Streamlit file uploader
+________________________________________
+8. Stock Trend Prediction (Basic)
+What it does
+•	Predict Uptrend / Downtrend
+Inputs
+•	Past stock prices (CSV)
+Model
+•	Moving Average / Linear Regression
+Bonus
+•	Show charts using st.line_chart()
+________________________________________
+ 9. Image Classification App
+Example
+•	Cat vs Dog
+•	Handwritten digit recognition
+Tech
+•	CNN / Pre-trained model
+•	st.file_uploader() for images
+________________________________________
+ 10. Chatbot Using Streamlit
+What it does
+•	Simple AI chatbot
+Tech
+•	Rule-based or LLM API
+•	Streamlit chat UI
+
+any one project we will do projects 
+
+
+
+an bitcone price prediction and so on 
+
+---
+import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread('images\OIP (6).jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+_, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY) #simple segmentation
+
+plt.figure(figsize=(10,5))
+plt.subplot(1,2,1)
+plt.title('Original Image')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(1,2,2)
+plt.title('Segmented Image')
+plt.imshow(binary, cmap='gray') 
+plt.show()
