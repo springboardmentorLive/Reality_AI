@@ -1,0 +1,11 @@
+location,size_sqft,bhk,furnishing,rent
+Hyderabad,800,2,Furnished,18000
+Hyderabad,1000,3,Unfurnished,22000
+Bangalore,1200,3,Furnished,30000
+Bangalore,900,2,Unfurnished,20000
+Chennai,850,2,Furnished,17000
+Chennai,1100,3,Unfurnished,24000
+Mumbai,700,1,Furnished,35000
+Mumbai,900,2,Unfurnished,42000
+Delhi,1000,3,Furnished,28000
+Delhi,800,2,Unfurnished,21000
