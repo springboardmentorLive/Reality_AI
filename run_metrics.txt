@@ -1,5 +1,0 @@
-Timestamp: 2025-12-09 18:52:34.607670
-Reference length: 3 words
-Hypothesis length: 51 words
-WER: 14.67
-
