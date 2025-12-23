@@ -1,0 +1,22 @@
+from groq import Groq
+
+client = Groq(api_key="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")
+
+def ask_bot(prompt):
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    # FIX: message ["content"] X message.content ✔
+    return response.choices[0].message.content
+
+print("AI Chatbot Ready! Type 'quit' to exit.\n")
+
+while True:
+    user = input("You: ")
+    if user.lower() == "quit":
+        print("Bot: Bye!")
+        break
+    print("Bot:", ask_bot(user))
