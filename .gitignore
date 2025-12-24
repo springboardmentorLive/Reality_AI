@@ -35,7 +35,7 @@ House_Price_19-12/models/
 # ===========================
 logs/
 *.log
-realtime.stt/model
+realtime.stt/model/
 
 
 
