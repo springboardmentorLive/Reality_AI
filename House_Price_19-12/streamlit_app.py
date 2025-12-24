@@ -56,7 +56,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-@st.cache_resource
 def load_model_and_artifacts():
         model = joblib.load('models/rent_predictor_model.pkl')
         location_encoder = joblib.load('models/location_encoder.pkl')
