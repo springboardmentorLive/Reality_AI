@@ -10,5 +10,6 @@ This branch contains all the files, applications and lecture notebooks related t
 - [Object Detection](object_detection/README.md): Contains the object detection application using PyTorch and openCV.
 - [Language Detection](language_detection/README.md): Contains the language detection application using LLM.
 - [Live Meeting Summarizer](live_meeting_summarizer/README.md): Contains the live meeting summarizer application using LLM.
+- [Food Recognition](food_recognition/README.md): Contains the food recognition application using PyTorch and description generation using Groq.
 
 
