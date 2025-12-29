@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background-color: var(--card-light);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s;
+        }
+        .dark-mode .card { background-color: var(--card-light); } 
+        .metric-card { text-align: center; font-size: 1.5em; font-weight: bold; color: var(--primary-color); }
+        @media (max-width: 900px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <div class="container" style="max-width: 1200px; margin-top: 20px;">
+        <div class="header" style="border-bottom: 2px solid var(--primary-color); padding-bottom: 10px;">
+            <h1><i class="fas fa-chart-line"></i> Analytics Dashboard</h1>
+            <a href="/" style="text-decoration: none; color: var(--primary-color); font-size: 1.1em;">
+                <i class="fas fa-home"></i> Go to Recorder
+            </a>
+            <button id="theme-toggle-dashboard" title="Toggle Dark/Light Mode" style="background: none; border: none; color: var(--primary-color); font-size: 1.5em; cursor: pointer;"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+    
+    <div class="dashboard-container">
+        <div class="card metric-card">Total Records: <span id="total-records">0</span></div>
+        <div class="card metric-card">Avg Sentiment: <span id="avg-sentiment">0.00</span></div>
+
+        <div class="card" style="grid-column: 1 / span 2;">
+            <h2>Sentiment Breakdown</h2>
+            <canvas id="sentimentChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Pitch/Gender Hint Distribution</h2>
+            <canvas id="pitchChart"></canvas>
+        </div>
+
+         <div class="card">
+            <h2>Download Report</h2>
+            <p>Generate a structured PDF report containing analysis history and key metrics.</p>
+            <a href="/report" target="_blank" class="download-btn" style="background-color: var(--success-color); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-block;"><i class="fas fa-file-pdf"></i> Download PDF Report</a>
+        </div>
+        
+    </div>
+
+    <script>
+        let sentimentChart;
+        let pitchChart;
+
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/dashboard_data');
+                const data = await response.json();
+
+                if (!data.success) { 
+                    document.getElementById('total-records').textContent = 0;
+                    document.getElementById('avg-sentiment').textContent = 'N/A';
+                    return; 
+                }
+
+                document.getElementById('total-records').textContent = data.total_records;
+                document.getElementById('avg-sentiment').textContent = data.average_sentiment_score;
+
+                renderSentimentChart(data.sentiment_breakdown);
+                renderPitchChart(data.gender_breakdown);
+
+            } catch (error) {
+                console.error('Failed to fetch dashboard data:', error);
+            }
+        }
+
+        function renderSentimentChart(counts) {
+            const ctx = document.getElementById('sentimentChart').getContext('2d');
+            const labels = Object.keys(counts);
+            const dataValues = Object.values(counts);
+            const backgroundColors = labels.map(label => {
+                if (label.includes('Positive')) return '#28a745';
+                if (label.includes('Negative')) return '#dc3545';
+                return '#ffc107'; 
+            });
+
+            if (sentimentChart) sentimentChart.destroy();
+            
+            sentimentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Transcriptions',
+                        data: dataValues,
+                        backgroundColor: backgroundColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function renderPitchChart(counts) {
+             const ctx = document.getElementById('pitchChart').getContext('2d');
+             
+             const labels = ['Low Pitch Hint (Male)', 'High Pitch Hint (Female)'];
+             const dataValues = [counts.Low_Pitch, counts.High_Pitch];
+
+             if (pitchChart) pitchChart.destroy();
+             
+             pitchChart = new Chart(ctx, {
+                 type: 'doughnut',
+                 data: {
+                     labels: labels,
+                     datasets: [{
+                         label: 'Gender Hint Distribution',
+                         data: dataValues,
+                         backgroundColor: ['#007bff', '#ff6384'],
+                         hoverOffset: 4
+                     }]
+                 },
+                 options: { responsive: true }
+             });
+        }
+        
+        // --- theme toggle logic for Dashboard ---
+        const themeToggle = document.getElementById('theme-toggle-dashboard');
+        themeToggle.addEventListener('click', () => {
+             document.body.classList.toggle('dark-mode');
+             document.body.classList.toggle('light-mode');
+             themeToggle.querySelector('i').className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        });
+
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+    </script>
+
+</body>
+</html>

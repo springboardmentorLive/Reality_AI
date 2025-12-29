@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Groq Audio Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-mode">
+
+<div class="container">
+    <div class="header">
+        <h1>🎙️ Groq Audio Analyzer</h1>
+        <div style="display: flex; gap: 10px;">
+             <a href="/dashboard" title="View Analytics Dashboard">
+                <i class="fas fa-chart-line"></i>
+             </a>
+             <button id="theme-toggle" title="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+
+    <div class="mode-switch-container">
+        <div class="mode-btn active" data-mode="live">
+            <i class="fas fa-microphone"></i> Live Recording
+        </div>
+        <div class="mode-btn" data-mode="upload">
+            <i class="fas fa-upload"></i> Upload Audio File
+        </div>
+    </div>
+
+    <div id="live-recording-section" class="active-section">
+        <p id="duration-info">Click to record and analyze **{{ duration }} seconds** of audio.</p>
+        
+        <div id="visualizer-container">
+            <div id="waveform-visualizer"></div>
+        </div>
+        
+        <button id="transcribe-btn"><i class="fas fa-play-circle"></i> Start Analysis</button>
+        <p id="countdown-timer" class="hidden">Recording: <span id="timer-value">{{ duration }}</span>s</p>
+    </div>
+
+    <div id="file-upload-section" class="hidden-section">
+        <p>Upload a clean **WAV, MP3 or FLAC** file for Groq transcription and analysis.</p>
+        
+        <input type="file" id="audio-file-input" accept=".wav,.mp3,.flac" style="margin-bottom: 20px;">
+        
+        <button id="upload-btn" disabled><i class="fas fa-cloud-upload-alt"></i> Analyze Uploaded File</button>
+        <p id="upload-status" class="status-initial hidden-section" style="margin-top: 15px;"></p>
+    </div>
+
+    <p id="status-message" class="status-initial"><i class="fas fa-info-circle"></i> Ready to start.</p>
+
+    <div class="result-box">
+        <h3>Analysis Results</h3>
+        
+        <div id="visual-mood-indicator" style="font-size: 3em; margin-bottom: 10px;">
+            </div>
+        
+        <div class="result-header">
+            <p><strong>Text:</strong> <span id="text-result">---</span></p>
+            <button id="copy-btn" title="Copy Text" class="hidden"><i class="fas fa-copy"></i></button>
+        </div>
+        
+        <p><strong>Language:</strong> <span id="language-result" class="tag">---</span></p>
+        <p><strong>Sentiment:</strong> <span id="sentiment-result" class="tag">---</span></p>
+        <p><strong>Gender Hint:</strong> <span id="gender-hint" class="tag">---</span></p>
+        <p><strong>Pitch Proxy (ZCR):</strong> <span id="pitch-proxy" class="tag">---</span></p>
+    </div>
+
+    <div class="history-section">
+        <h3><i class="fas fa-history"></i> Last 5 Transcriptions</h3>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Text Snippet</th>
+                    <th>Sentiment</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
+</html>
