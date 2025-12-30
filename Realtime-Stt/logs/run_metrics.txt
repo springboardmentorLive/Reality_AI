@@ -1,0 +1,7 @@
+Timestamp: 2025-12-30 14:27:19.483521
+Reference length: 42 words
+Hypothesis length: 48 words
+WER: 8.52
+Processing time: 2.34 seconds
+Confidence score: 0.92
+
