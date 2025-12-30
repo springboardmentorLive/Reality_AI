@@ -1,0 +1,11 @@
+Income,CreditScore,LoanAmount,EmploymentType,Dependents,LoanTerm,PropertyArea,Loan_Status
+50000,700,200000,Salaried,2,120,Urban,1
+30000,600,150000,Self-Employed,0,60,Semiurban,0
+75000,720,300000,Salaried,1,180,Urban,1
+40000,650,180000,Self-Employed,3,120,Rural,0
+60000,710,250000,Salaried,0,240,Urban,1
+45000,680,160000,Self-Employed,1,180,Semiurban,0
+80000,730,350000,Salaried,2,300,Urban,1
+35000,640,140000,Self-Employed,0,120,Rural,0
+70000,720,280000,Salaried,1,240,Urban,1
+30000,610,130000,Self-Employed,2,180,Semiurban,0
