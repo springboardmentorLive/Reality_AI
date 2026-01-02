@@ -1,55 +1,45 @@
 import pandas as pd
+import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
-import pickle
-import os
 
-# -----------------------------
 # Load dataset
-# -----------------------------
-if not os.path.exists("loan_data.csv"):
-    raise FileNotFoundError("loan_data.csv not found! Make sure your dataset is in the project folder.")
+df = pd.read_csv("loan_data.csv")
 
-data = pd.read_csv("loan_data.csv")
-
-# -----------------------------
-# Check and fix column names
-# -----------------------------
-# Make column names uniform (remove spaces)
-data.columns = [col.strip().replace(" ", "") for col in data.columns]
-
-# -----------------------------
-# Encode categorical features
-# -----------------------------
+# Encode categorical columns
 le_emp = LabelEncoder()
-data['EmploymentType'] = le_emp.fit_transform(data['EmploymentType'])
-
 le_area = LabelEncoder()
-data['PropertyArea'] = le_area.fit_transform(data['PropertyArea'])
 
-# -----------------------------
+df["EmploymentType"] = le_emp.fit_transform(df["EmploymentType"])
+df["PropertyArea"] = le_area.fit_transform(df["PropertyArea"])
+
 # Features & target
-# -----------------------------
-X = data[['Income', 'CreditScore', 'LoanAmount', 'EmploymentType', 'Dependents', 'LoanTerm', 'PropertyArea']]
-y = data['Loan_Status']
+X = df[
+    [
+        "Income",
+        "CreditScore",
+        "LoanAmount",
+        "EmploymentType",
+        "Dependents",
+        "LoanTerm",
+        "PropertyArea"
+    ]
+]
+y = df["Loan_Status"]
 
-# -----------------------------
-# Split dataset
-# -----------------------------
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
-# -----------------------------
 # Train model
-# -----------------------------
-model = LogisticRegression(max_iter=1000)
+model = LogisticRegression()
 model.fit(X_train, y_train)
 
-# -----------------------------
-# Save model and encoders
-# -----------------------------
+# Save model & encoders
 pickle.dump(model, open("loan_model.pkl", "wb"))
 pickle.dump(le_emp, open("employment_encoder.pkl", "wb"))
 pickle.dump(le_area, open("area_encoder.pkl", "wb"))
 
-print("Model and encoders trained and saved successfully!")
+print("✅ Model trained & saved successfully")
