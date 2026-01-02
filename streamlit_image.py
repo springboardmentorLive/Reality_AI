@@ -65,21 +65,31 @@
 
 
 
-
-#--------------##
+##---------------##
 ## Image Gallery ##
-#--------------##
+#----------------##
 import streamlit as st
 from PIL import Image
 
-col1,col2,col3 = st.columns(3)
-# row1,row2 = st.
+image_paths = [
+    "C:\\Users\\saina\\Downloads\\figure1_context_timeline.png",
+    "C:\\Users\\saina\\Downloads\\figure1_context_timeline.png",
+    "C:\\Users\\saina\\Downloads\\figure1_context_timeline.png",
+    "C:\\Users\\saina\\Downloads\\Springboard\\images (1).jpg",
+    "C:\\Users\\saina\\Downloads\\figure1_context_timeline.png",
+    "C:\\Users\\saina\\Downloads\\Springboard\\istockphoto-1550071750-612x612.jpg",
+    "C:\\Users\\saina\\Downloads\\Springboard\\silhouettes-of-hawaiian-palms-at-a-gorgeous-sunset-free-image.webp",
+    "C:\\Users\\saina\\Downloads\\Springboard\\images.jpg",
+    "C:\\Users\\saina\\Downloads\\Springboard\\istockphoto-517188688-612x612.jpg",
+    "C:\\Users\\saina\\Downloads\\figure1_context_timeline.png",
+    "C:\\Users\\saina\\Downloads\\figure1_context_timeline.png",
+    "C:\\Users\\saina\\Downloads\\KIOXIA_LC9_245TB.jpg"
+]
 
-with col1:
-    st.image(Image.open("C:\\Users\\saina\\Downloads\\figure1_context_timeline.png"))
-
-with col2:
-    st.image(Image.open("C:\\Users\\saina\\Downloads\\figure1_context_timeline.png"))
-
-with col3:
-    st.image(Image.open("C:\\Users\\saina\\Downloads\\figure1_context_timeline.png"))
+# 4 rows of 3 columns
+for i in range(0, len(image_paths), 3): # or simply range(0, 4)
+    cols = st.columns(3)
+    for j in range(3):
+        if i + j < len(image_paths):
+            with cols[j]:
+                st.image(Image.open(image_paths[i + j]))
