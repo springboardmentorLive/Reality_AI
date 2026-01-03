@@ -1,5 +1,5 @@
 #AI HAND GESTURE DETECTION 
-## Deacription
+## Description
 This project detects hand gestures using artificial intelligence techniques.
 
 ## Files
