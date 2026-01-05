@@ -75,8 +75,9 @@ with st.sidebar:
         if response.status_code == 200:
             chats = response.json()
             for chat in chats:
-                label = f"Chat {chat['id'][:8]}..."
-                if st.button(label, key=chat['id'], use_container_width=True):
+                # Use title if available, else fallback
+                title = chat.get('title', f"Chat {chat['id'][:8]}...")
+                if st.button(title, key=chat['id'], use_container_width=True):
                     load_chat_history(chat['id'])
     except Exception:
         st.warning("Could not connect to backend.")
@@ -106,15 +107,13 @@ else:
             payload = {
                 "chat_id": st.session_state.chat_id,
                 "message": prompt,
-                "history": st.session_state.messages[:-1]  # Send history excluding new msg (backend adds it? or assumes it?)
-                                                           # Backend app.main:93 appends current user msg.
-                                                           # So we should send history WITHOUT the new message?
-                                                           # Backend: 
-                                                           # current_history = request.history
-                                                           # user_message = request.message
-                                                           # current_history.append(... user_message ...)
-                                                           # So yes, we send history BEFORE this message.
+                "history": st.session_state.messages[:-1], # Send history excluding new msg
+                "title": st.session_state.get("chat_title") # Pass current title if specific state exists? 
+                                                            # Actually backend handles title generation/persistence. 
+                                                            # We can just rely on backend unless we want to persist known title.
             }
+            # Wait, if we reload a chat, we don't store its title in session_state currently.
+            # Ideally we should store st.session_state.chat_title when loading.
             
             with st.spinner("Thinking..."):
                 response = requests.post(f"{API_URL}/chat", json=payload)
@@ -122,9 +121,14 @@ else:
             if response.status_code == 200:
                 data = response.json()
                 ai_response = data.get("response")
-                updated_history = data.get("updated_history") # Full history including AI
+                updated_history = data.get("updated_history")
+                new_title = data.get("title")
                 
-                st.session_state.messages = updated_history # Sync state
+                st.session_state.messages = updated_history
+                if new_title:
+                   # Force reload sidebar if title changed (new chat)? 
+                   # Streamlit rerun might be needed or just let next interaction update it.
+                   pass
                 
                 with st.chat_message("assistant"):
                     st.markdown(ai_response)

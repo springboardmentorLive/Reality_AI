@@ -33,7 +33,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
 
-## S3
+## --- S3 Service ---
 def get_s3_client():
     return boto3.client(
         "s3",
@@ -51,8 +51,18 @@ def list_chats():
                 key = obj['Key']
                 if key.endswith('.json'):
                     chat_id = key.replace('.json', '')
+                    # Optimization: For small number of chats, we can read the content to get the title
+                    # Ideally, we should store metadata or index, but for simplicity:
+                    try:
+                        obj_resp = s3.get_object(Bucket=AWS_BUCKET_NAME, Key=key)
+                        content = json.loads(obj_resp['Body'].read().decode('utf-8'))
+                        title = content.get("title", f"Chat {chat_id[:8]}")
+                    except Exception:
+                        title = f"Chat {chat_id[:8]}"
+
                     chats.append({
                         "id": chat_id,
+                        "title": title,
                         "last_modified": obj['LastModified'].isoformat()
                     })
         chats.sort(key=lambda x: x['last_modified'], reverse=True)
@@ -72,14 +82,14 @@ def load_chat(chat_id: str):
         print(f"Error loading chat {chat_id}: {e}")
         return None
 
-def save_chat(chat_id: str, messages: list):
+def save_chat(chat_id: str, chat_data: dict):
     s3 = get_s3_client()
     try:
         key = f"{chat_id}.json"
         s3.put_object(
             Bucket=AWS_BUCKET_NAME,
             Key=key,
-            Body=json.dumps(messages),
+            Body=json.dumps(chat_data),
             ContentType='application/json'
         )
         return True
@@ -87,9 +97,7 @@ def save_chat(chat_id: str, messages: list):
         print(f"Error saving chat {chat_id}: {e}")
         return False
 
-
-
-# Groq
+# --- Groq Logic ---
 groq_client = Groq(api_key=GROQ_API_KEY)
 GROQ_MODEL = "moonshotai/kimi-k2-instruct-0905"
 
@@ -105,11 +113,33 @@ def get_groq_response(messages: list):
         print(f"Error calling Groq API: {e}")
         return "Sorry, I encountered an error processing your request."
 
+def generate_title(user_message: str):
+    """
+    Generate a short 2-4 word title using Groq based on the first user message.
+    """
+    try:
+        messages = [
+            {"role": "system", "content": "Generate a very short, concise topic title (2-4 words maximum) for a chat starting with this message. Return ONLY the title, no quotes, no extra text."},
+            {"role": "user", "content": user_message}
+        ]
+        
+        chat_completion = groq_client.chat.completions.create(
+            messages=messages,
+            model=GROQ_MODEL,
+            temperature=0.5,
+            max_tokens=20
+        )
+        title = chat_completion.choices[0].message.content.strip().replace('"', '')
+        return title
+    except Exception as e:
+        print(f"Error generating title: {e}")
+        # Fallback to simple heuristic
+        return " ".join(user_message.split()[:4]) + "..."
 
-
-# =============
+# ==========================================
 # API Endpoints
-# =============
+# ==========================================
+
 @app.get("/api/chats")
 async def get_chats_endpoint():
     return list_chats()
@@ -123,7 +153,7 @@ async def get_chat_endpoint(chat_id: str):
 
 @app.post("/api/chat")
 async def chat_interaction(payload: dict):
-    # payload expected: {"chat_id": "...", "message": "...", "history": [...]}
+    # payload expected: {"chat_id": "...", "message": "...", "history": [...], "title": "..."}
     chat_id = payload.get("chat_id")
     if not chat_id:
         chat_id = str(uuid.uuid4())
@@ -131,17 +161,32 @@ async def chat_interaction(payload: dict):
     current_history = payload.get("history", [])
     user_message = payload.get("message")
     
+    # 1. Add user message
     current_history.append({"role": "user", "content": user_message})
-
+    
+    # 2. Get AI Response
     ai_response_content = get_groq_response(current_history)
+    
     # 3. Add AI message
     current_history.append({"role": "assistant", "content": ai_response_content})
-    # 4. Save to S3
-    save_chat(chat_id, current_history)
+    
+    # 4. Determine Title (if new or not provided)
+    title = payload.get("title")
+    # Generate title only if it's the very first exchange (len <= 2) and no title exists
+    if not title and len(current_history) <= 2:
+        title = generate_title(user_message)
+    
+    # 5. Save to S3
+    chat_data = {
+        "title": title,
+        "messages": current_history
+    }
+    save_chat(chat_id, chat_data)
     
     return {
         "response": ai_response_content, 
-        "updated_history": current_history
+        "updated_history": current_history,
+        "title": title
     }
 
 if __name__ == "__main__":
