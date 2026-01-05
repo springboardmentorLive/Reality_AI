@@ -2,12 +2,11 @@ import streamlit as st
 import requests
 import uuid
 
-# Configuration
 API_URL = "http://localhost:8000/api"
 
 st.set_page_config(page_title="Springboard AI Chat", page_icon="🤖", layout="wide")
 
-# Custom CSS for Premium Feel
+# Custom CSS
 st.markdown("""
 <style>
     .stApp {
@@ -107,13 +106,9 @@ else:
             payload = {
                 "chat_id": st.session_state.chat_id,
                 "message": prompt,
-                "history": st.session_state.messages[:-1], # Send history excluding new msg
-                "title": st.session_state.get("chat_title") # Pass current title if specific state exists? 
-                                                            # Actually backend handles title generation/persistence. 
-                                                            # We can just rely on backend unless we want to persist known title.
+                "history": st.session_state.messages[:-1],
+                "title": st.session_state.get("chat_title") 
             }
-            # Wait, if we reload a chat, we don't store its title in session_state currently.
-            # Ideally we should store st.session_state.chat_title when loading.
             
             with st.spinner("Thinking..."):
                 response = requests.post(f"{API_URL}/chat", json=payload)
@@ -126,8 +121,6 @@ else:
                 
                 st.session_state.messages = updated_history
                 if new_title:
-                   # Force reload sidebar if title changed (new chat)? 
-                   # Streamlit rerun might be needed or just let next interaction update it.
                    pass
                 
                 with st.chat_message("assistant"):

@@ -33,7 +33,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
 
-## --- S3 Service ---
+## S3 Service
 def get_s3_client():
     return boto3.client(
         "s3",
@@ -97,7 +97,11 @@ def save_chat(chat_id: str, chat_data: dict):
         print(f"Error saving chat {chat_id}: {e}")
         return False
 
-# --- Groq Logic ---
+
+
+
+
+
 groq_client = Groq(api_key=GROQ_API_KEY)
 GROQ_MODEL = "moonshotai/kimi-k2-instruct-0905"
 
@@ -112,6 +116,7 @@ def get_groq_response(messages: list):
     except Exception as e:
         print(f"Error calling Groq API: {e}")
         return "Sorry, I encountered an error processing your request."
+
 
 def generate_title(user_message: str):
     """
@@ -136,9 +141,9 @@ def generate_title(user_message: str):
         # Fallback to simple heuristic
         return " ".join(user_message.split()[:4]) + "..."
 
-# ==========================================
+# =============
 # API Endpoints
-# ==========================================
+# =============
 
 @app.get("/api/chats")
 async def get_chats_endpoint():
@@ -161,22 +166,18 @@ async def chat_interaction(payload: dict):
     current_history = payload.get("history", [])
     user_message = payload.get("message")
     
-    # 1. Add user message
     current_history.append({"role": "user", "content": user_message})
-    
-    # 2. Get AI Response
+
     ai_response_content = get_groq_response(current_history)
     
-    # 3. Add AI message
+    # Add AI message
     current_history.append({"role": "assistant", "content": ai_response_content})
-    
-    # 4. Determine Title (if new or not provided)
+    # Determine Title (if new or not provided)
     title = payload.get("title")
-    # Generate title only if it's the very first exchange (len <= 2) and no title exists
     if not title and len(current_history) <= 2:
         title = generate_title(user_message)
     
-    # 5. Save to S3
+    # Save to S3
     chat_data = {
         "title": title,
         "messages": current_history
