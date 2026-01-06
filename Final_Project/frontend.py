@@ -74,15 +74,18 @@ with st.sidebar:
         if response.status_code == 200:
             chats = response.json()
             for chat in chats:
-                if chat['title'] != None or chat['title'] != "":
-                    # Use title if available, else fallback
-                    title = chat.get('title', f"Chat {chat['id'][:8]}...")
-                else:
-                    title = f"{chat['messages'][0][0]['content'][:50]}"                    
+                title = chat.get('title')
+                # If title is missing or empty, try to derive from messages (legacy support)
+                if not title:
+                     # Since list_chats in backend doesn't return full messages, we might just use ID or a generic name.
+                     # However, the user's snippet showed "messages" in the S3 data, but list_chats ONLY returns {id, title, last_modified}.
+                     # We need to rely on what list_chats returns.
+                     # If backend's list_chats tries to read title and fails, it returns "Chat ID...".
+                     # Let's trust backend's returned 'title' field which we added logic for, OR fallback if it's explicitly None/Empty string.
+                     title = f"Chat {chat['id'][:8]}..."
                 
                 if st.button(title, key=chat['id'], use_container_width=True):
                     load_chat_history(chat['id'])
-
     except Exception:
         st.warning("Could not connect to backend.")
 

@@ -52,12 +52,27 @@ def list_chats():
                 if key.endswith('.json'):
                     chat_id = key.replace('.json', '')
                     # Optimization: For small number of chats, we can read the content to get the title
-                    # Ideally, we should store metadata or index, but for simplicity:
                     try:
                         obj_resp = s3.get_object(Bucket=AWS_BUCKET_NAME, Key=key)
                         content = json.loads(obj_resp['Body'].read().decode('utf-8'))
-                        title = content.get("title", f"Chat {chat_id[:8]}")
-                    except Exception:
+                        
+                        # 1. Try explicit title field
+                        title = content.get("title")
+                        
+                        # 2. If no title, try to derive from first message (legacy chats)
+                        if not title:
+                            messages = content.get("messages", [])
+                            if messages and len(messages) > 0:
+                                first_content = messages[0].get("content", "")
+                                # title = " ".join(first_content.split()[:5]) + "..."
+                                title = generate_title(first_content[:50])
+                        
+                        # 3. Fallback to ID
+                        if not title:
+                            title = f"Chat {chat_id[:8]}"
+                            
+                    except Exception as e:
+                        print(f"Error reading chat {chat_id}: {e}")
                         title = f"Chat {chat_id[:8]}"
 
                     chats.append({
