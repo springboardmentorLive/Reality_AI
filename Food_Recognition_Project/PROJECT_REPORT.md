@@ -576,3 +576,6 @@ The project showcases modern AI engineering practices including model optimizati
 | **Date** | December 2025 |
 
 ---
+Demo Link: https://infosys-springboard-foodnet.streamlit.app/
+
+---
