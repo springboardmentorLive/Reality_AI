@@ -29,7 +29,7 @@ bg_image = get_base64_bg("assets/bg1.jpg")
 # --------------------------------------------------
 st.markdown(f"""
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 html, body, [class*="css"] {{
     background-color: transparent !important;
 }}
@@ -48,15 +48,21 @@ html, body, [class*="css"] {{
 }}
 
 h1, h2, h3 {{
-    color: #f8fafc !important;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+    color: #ffffff !important;               /* Pure white */
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.9),
+        2px 2px 12px rgba(0,0,0,0.9);
+    font-weight: 700;
 }}
 
 p, span, li {{
-    color: #e5e7eb !important;
-    font-size: 16px;
-    line-height: 1.6;
+    color: #fffbeb !important;               /* Very light cream */
+    font-size: 17px;
+    line-height: 1.7;
+    text-shadow:
+        1px 1px 6px rgba(0,0,0,0.85);
 }}
+
 
 label {{
     color: #e5e7eb !important;
@@ -176,6 +182,39 @@ li[aria-selected="true"] {{
     color: #ffffff !important;
 }}
 
+/* ===== READABLE CONTENT BOX FOR HOME & ABOUT ===== */
+.readable-box {{
+    font-family: 'Poppins', sans-serif;
+    background: rgba(2, 6, 23, 0.70);
+    backdrop-filter: blur(6px);
+    padding: 28px 34px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}}
+
+/* Headings inside readable box */
+.readable-box h1,
+.readable-box h2,
+.readable-box h3 {{
+    color: #f9fafb !important;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}}
+
+/* Paragraph text */
+.readable-box p,
+.readable-box li {{
+    color: #e5e7eb !important;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.8;
+}}
+
+/* Highlighted text */
+.readable-box strong {{
+    color: #fbbf24;
+    font-weight: 700;
+}}
 
 
 
@@ -229,45 +268,55 @@ st.markdown("<hr>", unsafe_allow_html=True)
 # --------------------------------------------------
 if st.session_state.page == "Home":
     st.markdown("# Loan Approval Prediction System")
-    st.markdown("### Intelligent Financial Decision Support using Machine Learning")
+    st.markdown("### Smart Loan Eligibility Prediction using Machine Learning")
 
     if os.path.exists("assets/logo.png"):
         st.image("assets/logo.png", width=230)
 
     st.markdown("""
-The **Loan Approval Prediction System** is a machine learning–based web application
-that predicts whether a loan application is **Approved or Rejected** based on
-important financial and personal attributes of the applicant.
+The **Loan Approval Prediction System** is an intelligent web application that uses
+**Machine Learning algorithms** to predict whether a loan application is
+**Approved or Rejected** based on applicant financial and personal details.
 
-This system helps financial institutions make **faster, consistent, and data-driven**
-loan decisions.
+This system is designed to assist banks and financial institutions in making
+**accurate, fast, and data-driven loan decisions**, reducing manual effort and
+human bias.
+
+---
+
+###  How the System Works:
+- The user enters applicant and loan details  
+- The trained Machine Learning model analyzes the data  
+- The system predicts **Loan Approval Status**  
+- A confidence score is displayed for better decision understanding  
 
 ---
 
 ### Key Features:
-- User-friendly web interface  
-- Real-time loan eligibility prediction  
-- Probability-based decision output  
-- Interactive analytics dashboard  
+- Simple and interactive user interface  
+- Instant loan approval prediction  
+- Machine Learning–based classification  
+- Visual insights through analytics dashboard  
 
 ---
 
-### Parameters Considered:
+### Parameters Used for Prediction:
 - Applicant Income  
-- Credit Score  
+- Co-applicant Income  
+- Credit History  
 - Loan Amount  
-- Employment Type  
-- Number of Dependents  
 - Loan Term  
+- Employment Status  
 - Property Area  
+- Number of Dependents  
 
 ---
 
-### Objective :
-To reduce manual effort and improve accuracy in loan approval decisions
-using **Machine Learning classification techniques**.
+### Project Objective:
+To develop a **reliable loan approval prediction system** that improves
+decision accuracy and minimizes risk using **Machine Learning techniques**.
 
-> ⚠️ *This project is developed for educational and academic purposes only.*
+⚠️ *This project is developed for academic and learning purposes only.*
 """)
 
 # --------------------------------------------------
@@ -353,46 +402,49 @@ elif st.session_state.page == "About":
     st.markdown("# About This Project")
 
     st.markdown("""
-The **Loan Approval Prediction System** is a machine learning–powered web application
-designed to predict loan eligibility using applicant financial information.
+The **Loan Approval Prediction System** is a Machine Learning–based web application
+developed to analyze loan applicant data and predict whether a loan will be
+**Approved or Rejected**.
 
-The system uses a **Logistic Regression** algorithm to classify loan applications
-as **Approved** or **Rejected** with a confidence score.
-
----
-
-### Machine Learning Details:
-- Algorithm: Logistic Regression  
-- Type: Binary Classification  
-- Output: Loan Approval Status  
-- Probability Score for decision confidence  
+The system applies a **Logistic Regression** model trained on historical loan data
+to ensure accurate and reliable predictions.
 
 ---
 
-### Technologies Used:
+### Machine Learning Overview:
+- Algorithm Used: Logistic Regression  
+- Problem Type: Binary Classification  
+- Prediction Output: Loan Approval Status (Approved / Rejected)  
+- Confidence Score: Probability-based result  
+
+---
+
+### Technologies & Tools:
 - Python  
-- Streamlit  
-- Scikit-learn  
-- Pandas  
-- Matplotlib  
+- Streamlit (Web Interface)  
+- Scikit-learn (Machine Learning)  
+- Pandas (Data Processing)  
+- Matplotlib (Data Visualization)  
 
 ---
 
-### Use Case:
+### Project Purpose:
 - Academic mini / major project  
-- College demonstrations  
-- Machine learning portfolio  
+- Demonstration of Machine Learning concepts  
+- Practical implementation of ML in finance  
+- Portfolio project for placements  
 
 ---
 
-### Future Enhancements:
-- Multiple ML model comparison  
-- Database integration  
-- User authentication  
-- Cloud deployment  
+### Future Scope:
+- Integration of advanced ML models  
+- Model performance comparison  
+- Database connectivity for data storage  
+- User authentication and role management  
+- Deployment on cloud platforms  
 
-This project highlights the **real-world application of Machine Learning**
-in the financial domain.
+This project demonstrates how **Machine Learning can automate and improve**
+financial decision-making processes.
 """)
 
 # --------------------------------------------------
