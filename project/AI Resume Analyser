@@ -1,0 +1,94 @@
+
+### 🧠 AI Resume Analyzer (Employee)
+Project Summary
+
+The AI Resume Analyzer & ATS System is a web-based application that automates resume evaluation and recruitment screening using Machine Learning and NLP. It helps job seekers understand ATS performance and assists recruiters in shortlisting candidates efficiently.
+
+Steps Involved in the Project
+
+Resume Upload
+
+User uploads resume in PDF or DOCX format
+
+Text Extraction
+
+Resume text is extracted using document parsing libraries
+
+Text Preprocessing
+
+Cleaning, lower-casing, and removing unwanted symbols
+
+Feature Extraction
+
+Convert text into numerical form using TF-IDF
+
+Role Prediction
+
+Resume content matched with predefined job roles
+
+ATS Score Calculation
+
+Score computed based on skill match and structure
+
+Skill Analysis
+
+Identify matched and missing skills
+
+Selection Probability
+
+Confidence percentage calculated
+
+Recruiter Screening
+
+Job description matched with multiple resumes
+
+Final Recommendation
+
+Resume improvement suggestions or shortlist decision
+
+Technologies & Frameworks Used
+Programming Language
+
+Python
+
+Framework
+
+Streamlit (for web application and UI)
+
+Machine Learning & NLP
+
+TF-IDF Vectorization
+
+Cosine Similarity
+
+Text preprocessing techniques
+
+Libraries
+
+scikit-learn
+
+pandas
+
+pdfplumber
+
+python-docx
+
+plotly
+
+Key Features
+
+ATS score visualization
+
+Resume preview
+
+Role prediction with confidence
+
+Skill gap analysis
+
+Selection probability percentage
+
+Automated recruiter screening
+
+Conclusion (Short)
+
+This project demonstrates how AI and NLP can be applied to real-world recruitment systems. It improves resume quality for candidates and automates screening for recruiters
