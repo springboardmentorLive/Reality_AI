@@ -16,7 +16,6 @@ The project follows a standard Machine Learning pipeline integrated into a Strea
 *   **Dataset:** A synthetic dataset was created with representative keywords and phrases for each of the three job roles.
 *   **Preprocessing:** The raw text data undergoes cleaning to remove noise (URLs, emails, special characters) and is normalized (lowercasing).
 *   **Feature Extraction:** We use **TF-IDF (Term Frequency-Inverse Document Frequency)** to convert text data into numerical vectors. This highlights unique, role-specific keywords.
-    *   *Configuration:* Unigrams and Bigrams are used to capture context (e.g., "machine learning").
 *   **Modeling:** A **Random Forest Classifier** is trained on the vectorized data. This ensemble method provides robust predictions and handles high-dimensional text data well.
 *   **Artifacts:** The trained model and vectorizer are serialized and saved as `.pkl` files for use in the app.
 
