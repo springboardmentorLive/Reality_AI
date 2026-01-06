@@ -22,8 +22,7 @@ The project follows a standard Machine Learning pipeline integrated into a Strea
 ### 2. Utility Layer (`utils.py`)
 This module handles all text processing tasks:
 *   **Text Extraction:** Specialized functions to parse different file formats:
-    *   `PyPDF2` for PDF files.
-    *   `python-docx` for Word documents.
+    *   `PyPDF2` for PDF files
     *   Standard file reading for Text files.
 *   **Text Cleaning:** A robust `clean_text` function that:
     *   Removes URLs, emails, and special characters.
