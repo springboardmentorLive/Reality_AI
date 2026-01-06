@@ -1,0 +1,36 @@
+Sarah Johnson
+Java Developer
+
+PROFESSIONAL SUMMARY
+Skilled Java developer with 6+ years of experience building enterprise applications using Spring Framework, microservices architecture, and cloud technologies.
+
+TECHNICAL SKILLS
+- Languages: Java, SQL, JavaScript
+- Frameworks: Spring Boot, Spring MVC, Spring Cloud, Hibernate
+- Microservices: Docker, Kubernetes, Netflix OSS
+- Databases: MySQL, PostgreSQL, MongoDB, Redis
+- Tools: Maven, Gradle, Git, Jenkins
+- Cloud: AWS, Azure
+- Testing: JUnit, Mockito, Integration Testing
+- APIs: REST, SOAP, GraphQL
+
+PROFESSIONAL EXPERIENCE
+Senior Java Developer | Enterprise Solutions Ltd | 2020-Present
+- Designed and developed microservices architecture using Spring Boot and Spring Cloud
+- Implemented RESTful APIs for enterprise applications
+- Built authentication and authorization using Spring Security and OAuth2
+- Deployed applications on Kubernetes and AWS
+- Integrated message queues using Kafka and RabbitMQ
+
+Java Developer | Software Systems Inc | 2018-2020
+- Developed web applications using Spring MVC and Hibernate
+- Created database schemas and optimized SQL queries
+- Implemented CI/CD pipelines using Jenkins
+- Worked in Agile/Scrum environment
+
+EDUCATION
+Bachelor of Science in Computer Science | Tech University | 2017
+
+CERTIFICATIONS
+- Oracle Certified Professional Java SE Programmer
+- AWS Certified Developer

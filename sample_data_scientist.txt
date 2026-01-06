@@ -1,0 +1,31 @@
+John Smith
+Data Scientist
+
+PROFESSIONAL SUMMARY
+Experienced data scientist with 5+ years of expertise in machine learning, deep learning, and statistical analysis. Proven track record of building predictive models and extracting actionable insights from complex datasets.
+
+SKILLS
+- Programming: Python, R, SQL
+- Machine Learning: scikit-learn, TensorFlow, PyTorch, Keras
+- Data Analysis: pandas, numpy, matplotlib, seaborn
+- Big Data: Spark, Hadoop
+- Deep Learning: Neural Networks, CNN, RNN, LSTM
+- Tools: Jupyter, Git, Docker
+- Statistical Analysis: Hypothesis testing, regression, classification
+- Data Visualization: Tableau, Power BI
+
+EXPERIENCE
+Senior Data Scientist | Tech Corp | 2020-Present
+- Developed machine learning models for customer churn prediction with 92% accuracy
+- Built deep learning models for image classification using CNN
+- Implemented NLP solutions for sentiment analysis
+- Created data pipelines using Spark and Python
+
+Data Scientist | Analytics Inc | 2018-2020
+- Performed statistical analysis and A/B testing
+- Built predictive models using random forest and gradient boosting
+- Developed data visualization dashboards in Tableau
+
+EDUCATION
+PhD in Statistics | University of Technology | 2018
+Master's in Data Science | Tech University | 2016

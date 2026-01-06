@@ -1,0 +1,45 @@
+Michael Chen
+Web Developer
+
+PROFESSIONAL SUMMARY
+Creative and detail-oriented web developer with 4+ years of experience building modern, responsive web applications using React, Node.js, and modern JavaScript frameworks.
+
+TECHNICAL SKILLS
+- Frontend: HTML5, CSS3, JavaScript, TypeScript
+- Frameworks: React, Next.js, Vue.js, Angular
+- Backend: Node.js, Express, REST API, GraphQL
+- Styling: CSS, SASS, Tailwind CSS, Bootstrap, Material-UI
+- Databases: MongoDB, PostgreSQL, MySQL
+- Tools: Git, Webpack, npm, Babel
+- Testing: Jest, React Testing Library
+- Cloud: AWS, Vercel, Netlify
+- UI/UX: Figma, Adobe XD, Responsive Design
+
+WORK EXPERIENCE
+Senior Web Developer | Digital Agency | 2021-Present
+- Built modern web applications using React and Next.js
+- Developed RESTful APIs using Node.js and Express
+- Implemented responsive designs with Tailwind CSS
+- Integrated authentication using JWT and OAuth
+- Deployed applications on Vercel and AWS
+
+Web Developer | Creative Solutions | 2019-2021
+- Created interactive user interfaces using React and Vue.js
+- Developed full-stack applications using MERN stack
+- Implemented GraphQL APIs for efficient data fetching
+- Optimized web performance and SEO
+- Worked with designers to implement pixel-perfect designs
+
+PROJECTS
+E-commerce Platform
+- Built using React, Node.js, Express, MongoDB
+- Implemented shopping cart, payment integration, user authentication
+- Responsive design with mobile-first approach
+
+Portfolio Website Builder
+- Developed using Next.js, TypeScript, Prisma
+- Drag-and-drop interface for easy customization
+- Deployed on Vercel with automatic deployments
+
+EDUCATION
+Bachelor of Science in Web Development | Digital University | 2019
