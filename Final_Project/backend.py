@@ -120,7 +120,7 @@ def get_groq_response(messages: list):
 
 def generate_title(user_message: str):
     """
-    Generate a short 2-4 word title using Groq based on the first user message.
+    Generate a short 2-4 word title using Groq based on the first user message or based upon the file(PDF/txt) uploaded by user.
     """
     try:
         messages = [
@@ -170,14 +170,22 @@ async def chat_interaction(payload: dict):
 
     ai_response_content = get_groq_response(current_history)
     
-    # Add AI message
+    # 3. Add AI message
     current_history.append({"role": "assistant", "content": ai_response_content})
-    # Determine Title (if new or not provided)
-    title = payload.get("title")
-    if not title and len(current_history) <= 2:
-        title = generate_title(user_message)
     
-    # Save to S3
+    # 4. Determine Title (if new or not provided)
+    title = payload.get("title")
+    # Generate title only if it's the very first exchange (len <= 2) and no title exists
+    if not title and len(current_history) <= 4: # Allow for system msg + user msg + ai msg (potentially 3 or 4 items)
+        document_name = payload.get("document_name")
+        if document_name:
+            # Use filename as title, removing extension
+            title = os.path.splitext(document_name)[0]
+            # Optionally fallback to LLM if filename is generic? For now user asked for filename.
+        else:
+            title = generate_title(user_message)
+    
+    # 5. Save to S3
     chat_data = {
         "title": title,
         "messages": current_history

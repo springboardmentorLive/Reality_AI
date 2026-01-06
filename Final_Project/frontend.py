@@ -74,12 +74,34 @@ with st.sidebar:
         if response.status_code == 200:
             chats = response.json()
             for chat in chats:
-                # Use title if available, else fallback
-                title = chat.get('title', f"Chat {chat['id'][:8]}...")
+                if chat['title'] != None or chat['title'] != "":
+                    # Use title if available, else fallback
+                    title = chat.get('title', f"Chat {chat['id'][:8]}...")
+                else:
+                    title = f"{chat['messages'][0][0]['content'][:50]}"                    
+                
                 if st.button(title, key=chat['id'], use_container_width=True):
                     load_chat_history(chat['id'])
+
     except Exception:
         st.warning("Could not connect to backend.")
+
+# --- Document Q&A ---
+import pypdf
+
+def extract_text_from_file(uploaded_file):
+    try:
+        text = ""
+        if uploaded_file.type == "application/pdf":
+            reader = pypdf.PdfReader(uploaded_file)
+            for page in reader.pages:
+                text += page.extract_text() + "\n"
+        else: # Text file
+            text = uploaded_file.read().decode("utf-8")
+        return text
+    except Exception as e:
+        st.error(f"Error reading file: {e}")
+        return None
 
 # Main Chat Area
 st.title("🤖 Springboard AI Chatbot")
@@ -90,9 +112,33 @@ else:
     # Display Messages
     for message in st.session_state.messages:
         role = message.get("role")
+        if role == "system":
+            continue # Don't show context documents in chat
+            
         content = message.get("content")
         with st.chat_message(role):
             st.markdown(content)
+    
+    # File Uploader (placed just above chat input)
+    # Using columns to position it or just a popover
+    with st.popover("➕ Add Context", use_container_width=False):
+        st.markdown("### Upload Document")
+        uploaded_file = st.file_uploader("Upload PDF or TXT", type=["pdf", "txt"], key="main_uploader")
+        
+        if uploaded_file:
+            # Check if we already processed this file
+            if "last_processed_file" not in st.session_state or st.session_state.last_processed_file != uploaded_file.name:
+                with st.spinner("Processing document..."):
+                    text = extract_text_from_file(uploaded_file)
+                    if text:
+                        context_msg = {
+                            "role": "system", 
+                            "content": f"Use the following document content as context to answer user questions:\n\n{text[:50000]}"
+                        }
+                        st.session_state.messages.append(context_msg)
+                        st.session_state.last_processed_file = uploaded_file.name
+                        st.success(f"Attached: {uploaded_file.name}")
+                        # Ideally we might want to inform backend immediately or rely on next message
 
     # Chat Input
     if prompt := st.chat_input("Type a message..."):
