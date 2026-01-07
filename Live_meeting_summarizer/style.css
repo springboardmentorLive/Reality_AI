@@ -1,0 +1,85 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+html, body, [class*="css"]  {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Main Container */
+.stApp {
+    background-color: #0E1117;
+    background-image: radial-gradient(circle at 50% 0%, #1c2331 0%, #0E1117 70%);
+    color: #FAFAFA;
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+}
+
+h1 {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 20px;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #161B22;
+    border-right: 1px solid #30363D;
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(45deg, #238636, #2EA043);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #2EA043, #3FB950);
+}
+
+.stButton > button:active {
+    transform: translateY(0px);
+}
+
+/* Cards / Metric Containers */
+div[data-testid="stExpander"] {
+    background-color: #161B22;
+    border: 1px solid #30363D;
+    border-radius: 10px;
+}
+
+/* Text Areas */
+.stTextArea textarea {
+    background-color: #0D1117;
+    color: #C9D1D9;
+    border: 1px solid #30363D;
+    border-radius: 8px;
+}
+
+/* Audio Player */
+.stAudio {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Success/Error/Info boxes */
+.stAlert {
+    background-color: #161B22;
+    color: #C9D1D9;
+    border: 1px solid #30363D;
+    border-radius: 8px;
+}
