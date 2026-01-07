@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import uuid
+import json
 
 API_URL = "http://localhost:8000/api"
 
@@ -47,7 +48,7 @@ def load_chat_history(chat_id):
         response = requests.get(f"{API_URL}/chats/{chat_id}")
         if response.status_code == 200:
             data = response.json()
-            # Handle different response formats if needed
+            # Handle different response formats
             if isinstance(data, list):
                 st.session_state.messages = data
             elif isinstance(data, dict):
@@ -77,19 +78,14 @@ with st.sidebar:
                 title = chat.get('title')
                 # If title is missing or empty, try to derive from messages (legacy support)
                 if not title:
-                     # Since list_chats in backend doesn't return full messages, we might just use ID or a generic name.
-                     # However, the user's snippet showed "messages" in the S3 data, but list_chats ONLY returns {id, title, last_modified}.
-                     # We need to rely on what list_chats returns.
-                     # If backend's list_chats tries to read title and fails, it returns "Chat ID...".
-                     # Let's trust backend's returned 'title' field which we added logic for, OR fallback if it's explicitly None/Empty string.
-                     title = f"Chat {chat['id'][:8]}..."
+                    title = f"Chat {chat['id'][:8]}..."
                 
                 if st.button(title, key=chat['id'], use_container_width=True):
                     load_chat_history(chat['id'])
     except Exception:
         st.warning("Could not connect to backend.")
 
-# --- Document Q&A ---
+# --- Document Upload portion ---
 import pypdf
 
 def extract_text_from_file(uploaded_file):
@@ -106,13 +102,15 @@ def extract_text_from_file(uploaded_file):
         st.error(f"Error reading file: {e}")
         return None
 
-# Main Chat Area
+
+
+
+
 st.title("🤖 Springboard AI Chatbot")
 
 if not st.session_state.chat_id:
     st.info("Start a new chat or select one from the sidebar to begin.")
 else:
-    # Display Messages
     for message in st.session_state.messages:
         role = message.get("role")
         if role == "system":
@@ -122,8 +120,7 @@ else:
         with st.chat_message(role):
             st.markdown(content)
     
-    # File Uploader (placed just above chat input)
-    # Using columns to position it or just a popover
+
     with st.popover("➕ Add Context", use_container_width=False):
         st.markdown("### Upload Document")
         uploaded_file = st.file_uploader("Upload PDF or TXT", type=["pdf", "txt"], key="main_uploader")
@@ -141,16 +138,14 @@ else:
                         st.session_state.messages.append(context_msg)
                         st.session_state.last_processed_file = uploaded_file.name
                         st.success(f"Attached: {uploaded_file.name}")
-                        # Ideally we might want to inform backend immediately or rely on next message
 
     # Chat Input
     if prompt := st.chat_input("Type a message..."):
-        # Add user message
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
             
-        # Call Backend
+        #### Call Backend
         try:
             payload = {
                 "chat_id": st.session_state.chat_id,
@@ -159,23 +154,40 @@ else:
                 "title": st.session_state.get("chat_title") 
             }
             
-            with st.spinner("Thinking..."):
-                response = requests.post(f"{API_URL}/chat", json=payload)
+            with st.chat_message("assistant"):
+                response = requests.post(f"{API_URL}/chat", json=payload, stream=True)
                 
-            if response.status_code == 200:
-                data = response.json()
-                ai_response = data.get("response")
-                updated_history = data.get("updated_history")
-                new_title = data.get("title")
-                
-                st.session_state.messages = updated_history
-                if new_title:
-                   pass
-                
-                with st.chat_message("assistant"):
-                    st.markdown(ai_response)
-            else:
-                st.error("Error getting response from backend.")
+                if response.status_code == 200:
+                    def stream_parser():
+                        for line in response.iter_lines():
+                            if line:
+                                try:
+                                    data = json.loads(line.decode('utf-8'))
+                                    if data['type'] == 'chunk':
+                                        yield data['content']
+                                    elif data['type'] == 'complete':
+                                        st.session_state.stream_metadata = data
+                                    elif data['type'] == 'error':
+                                        st.error(data['content'])
+                                except json.JSONDecodeError:
+                                    pass
+                    
+                    full_response = st.write_stream(stream_parser())
+                    
+                    # Update history
+                    st.session_state.messages.append({"role": "assistant", "content": full_response})
+                    
+                    # Handle metadata (e.g. title update)
+                    if "stream_metadata" in st.session_state:
+                        meta = st.session_state.pop("stream_metadata")
+                        new_title = meta.get("title")
+                        chat_id = meta.get("chat_id")
+                        
+                        # If a new title was generated, we might want to update the UI (optional: rerun)
+                        if meta.get("new_title_generated"):
+                             st.rerun()
+                else:
+                    st.error("Error getting response from backend.")
                 
         except Exception as e:
             st.error(f"Connection error: {e}")
