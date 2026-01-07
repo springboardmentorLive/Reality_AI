@@ -106,7 +106,7 @@ def extract_text_from_file(uploaded_file):
 
 
 
-st.title("🤖 Springboard AI Chatbot")
+st.title("🤖 SpringBot AI")
 
 if not st.session_state.chat_id:
     st.info("Start a new chat or select one from the sidebar to begin.")
