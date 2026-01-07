@@ -1,0 +1,16 @@
+import streamlit as st
+st.title("my App with Navigation")
+
+#Sidebar for navigation
+page = st.sidebar.selectbox("Go to", ["Home", "Dashboard", "Settings"])
+
+# Show content based on selection
+if page == "Home":
+    st.header("Welcome to Home")
+    st.write("This is the home page content.")
+elif page == "Dashboard":
+    st.header("Dashboard")
+    st.write("Charts, graphs, and metrics go here.")
+elif page == "Settings":
+    st.header("Settings")
+    st.write("Change your app preference here.")

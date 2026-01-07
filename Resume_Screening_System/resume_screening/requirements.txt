@@ -1,0 +1,9 @@
+streamlit
+scikit-learn
+nltk
+pypdf2
+pandas
+numpy
+
+plotly
+streamlit-option-menu
