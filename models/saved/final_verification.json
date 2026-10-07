@@ -1,0 +1,300 @@
+{
+  "title": "RealtyAI Phase 5 Independent Verification Summary",
+  "timestamp": "2026-10-02T21:00:00+05:30",
+  "environment": {
+    "python": "3.13.14",
+    "torch": "2.9.1+cpu",
+    "os": "Windows-11-10.0.26300-SP0"
+  },
+  "models": {
+    "spacenet_unet": {
+      "checkpoint": "unet_spacenet_v1.pt",
+      "sha256": "28bedc6a4750f99bdb2ef8ee2312d85f53d2b72fdf805c2a29e13db6bd4352f7",
+      "validation_chips": 6,
+      "mean_iou": 0.3593,
+      "mean_dice": 0.4985,
+      "mean_precision": 0.7142,
+      "mean_recall": 0.4334,
+      "per_chip": [
+        {
+          "chip_id": "vegas_1041",
+          "tp": 7954,
+          "fp": 5914,
+          "fn": 11365,
+          "tn": 40303,
+          "iou": 0.3152,
+          "dice": 0.4793,
+          "precision": 0.5736,
+          "recall": 0.4117
+        },
+        {
+          "chip_id": "vegas_1042",
+          "tp": 9073,
+          "fp": 4007,
+          "fn": 14763,
+          "tn": 37693,
+          "iou": 0.3259,
+          "dice": 0.4915,
+          "precision": 0.6937,
+          "recall": 0.3806
+        },
+        {
+          "chip_id": "vegas_1047",
+          "tp": 672,
+          "fp": 435,
+          "fn": 11411,
+          "tn": 53018,
+          "iou": 0.0537,
+          "dice": 0.1019,
+          "precision": 0.607,
+          "recall": 0.0556
+        },
+        {
+          "chip_id": "vegas_1048",
+          "tp": 13480,
+          "fp": 4184,
+          "fn": 7456,
+          "tn": 40416,
+          "iou": 0.5366,
+          "dice": 0.6984,
+          "precision": 0.7631,
+          "recall": 0.6439
+        },
+        {
+          "chip_id": "vegas_1049",
+          "tp": 12689,
+          "fp": 4163,
+          "fn": 2748,
+          "tn": 45936,
+          "iou": 0.6474,
+          "dice": 0.786,
+          "precision": 0.753,
+          "recall": 0.822
+        },
+        {
+          "chip_id": "vegas_1051",
+          "tp": 5375,
+          "fp": 634,
+          "fn": 13382,
+          "tn": 46145,
+          "iou": 0.2772,
+          "dice": 0.4341,
+          "precision": 0.8945,
+          "recall": 0.2866
+        }
+      ],
+      "status": "VERIFIED_MATCH"
+    },
+    "peer_resnet": {
+      "checkpoint": "resnet_peer_collapse_v1.pt",
+      "sha256": "b5c5d063f1dfa2a040ad2f3e3b942e37bbf6d8da67f1399f34769ba127eebc69",
+      "sample_counts": {
+        "train": 1042,
+        "validation": 184,
+        "benchmark_test": 146,
+        "total_unique_images": 1372
+      },
+      "benchmark_test_evaluation": {
+        "n": 146,
+        "accuracy": 0.7055,
+        "macro_f1": 0.6721,
+        "confusion_matrix": [
+          [
+            59,
+            1,
+            7
+          ],
+          [
+            7,
+            23,
+            9
+          ],
+          [
+            12,
+            7,
+            21
+          ]
+        ]
+      },
+      "validation_evaluation": {
+        "n": 184,
+        "accuracy": 0.7337,
+        "macro_f1": 0.7294,
+        "confusion_matrix": [
+          [
+            65,
+            2,
+            12
+          ],
+          [
+            3,
+            38,
+            7
+          ],
+          [
+            20,
+            5,
+            32
+          ]
+        ]
+      },
+      "status": "VERIFIED_MATCH"
+    },
+    "ames_xgboost": {
+      "model": "xgboost_ames_v1.pkl",
+      "sha256": "96b9ebc30c5f2edcceedf4f422cc805f77aa979eae6a1a090decf3500780300e",
+      "validation_evaluation": {
+        "n": 219,
+        "mae": 15767.26,
+        "rmse": 25667.7,
+        "r2_score": 0.8803,
+        "mape_pct": 8.92
+      },
+      "held_out_test_evaluation": {
+        "n": 219,
+        "mae": 15092.41,
+        "rmse": 22203.78,
+        "r2_score": 0.9103,
+        "mape_pct": 9.17
+      },
+      "uncertainty_calibration": {
+        "methodology": "5-Fold Out-of-Fold Residual Calibration (Cross-Conformal Construction; Vovk 2015; Barber et al. 2021)",
+        "calibration_sample_size": 1020,
+        "order_statistic_index": 919,
+        "discrete_calibrated_margin_pct": 19.57,
+        "quantile_calibrated_margin_pct": 19.59,
+        "nominal_target_coverage_pct": 90.0,
+        "empirical_test_coverage_pct": 92.24
+      },
+      "status": "VERIFIED_MATCH"
+    },
+    "zillow_prophet": {
+      "artifact": "forecaster_summary.json",
+      "sha256": "1d008e35b24bc80a4b424b1dfc03698a5844fb63d92a5331955cc56ab2ad0ecd",
+      "metros_count": 10,
+      "aggregation_rule": "Arithmetic mean of individual per-MSA test metrics",
+      "arithmetic_mean_test_metrics": {
+        "mean_mae": 39580.75,
+        "mean_rmse": 45888.3,
+        "mean_mape_pct": 8.71,
+        "mean_95pct_interval_coverage": 40.31
+      },
+      "per_metro_evaluations": [
+        {
+          "metro": "New York, NY",
+          "rank": 1,
+          "n_test_months": 32,
+          "mae": 4027.28,
+          "rmse": 4469.74,
+          "mape_pct": 0.58,
+          "interval_coverage_95_pct": 100.0
+        },
+        {
+          "metro": "Los Angeles, CA",
+          "rank": 2,
+          "n_test_months": 32,
+          "mae": 64989.54,
+          "rmse": 77405.7,
+          "mape_pct": 6.84,
+          "interval_coverage_95_pct": 46.88
+        },
+        {
+          "metro": "Chicago, IL",
+          "rank": 3,
+          "n_test_months": 32,
+          "mae": 3678.54,
+          "rmse": 4567.49,
+          "mape_pct": 1.07,
+          "interval_coverage_95_pct": 100.0
+        },
+        {
+          "metro": "Dallas, TX",
+          "rank": 4,
+          "n_test_months": 32,
+          "mae": 71354.19,
+          "rmse": 78702.52,
+          "mape_pct": 19.26,
+          "interval_coverage_95_pct": 0.0
+        },
+        {
+          "metro": "Houston, TX",
+          "rank": 5,
+          "n_test_months": 32,
+          "mae": 48395.38,
+          "rmse": 53093.9,
+          "mape_pct": 15.56,
+          "interval_coverage_95_pct": 0.0
+        },
+        {
+          "metro": "Washington, DC",
+          "rank": 6,
+          "n_test_months": 32,
+          "mae": 38943.64,
+          "rmse": 43551.16,
+          "mape_pct": 6.81,
+          "interval_coverage_95_pct": 53.12
+        },
+        {
+          "metro": "Philadelphia, PA",
+          "rank": 7,
+          "n_test_months": 32,
+          "mae": 16218.98,
+          "rmse": 19115.44,
+          "mape_pct": 4.26,
+          "interval_coverage_95_pct": 21.88
+        },
+        {
+          "metro": "Miami, FL",
+          "rank": 8,
+          "n_test_months": 32,
+          "mae": 57458.82,
+          "rmse": 71450.84,
+          "mape_pct": 12.0,
+          "interval_coverage_95_pct": 31.25
+        },
+        {
+          "metro": "Atlanta, GA",
+          "rank": 9,
+          "n_test_months": 32,
+          "mae": 66764.36,
+          "rmse": 74767.51,
+          "mape_pct": 17.38,
+          "interval_coverage_95_pct": 0.0
+        },
+        {
+          "metro": "Boston, MA",
+          "rank": 10,
+          "n_test_months": 32,
+          "mae": 23976.8,
+          "rmse": 31758.72,
+          "mape_pct": 3.3,
+          "interval_coverage_95_pct": 50.0
+        }
+      ],
+      "temporal_protocol": {
+        "leakage_protection": "Strict chronological forward-chaining split; no shuffling; past-to-future projection only",
+        "training_period": "2000-01-31 to 2021-12-31 (264 monthly snapshots)",
+        "validation_period": "2022-01-31 to 2023-12-31 (24 monthly snapshots)",
+        "held_out_test_period": "2024-01-31 to 2026-08-31 (32 monthly snapshots)"
+      },
+      "status": "VERIFIED_MATCH"
+    }
+  },
+  "manifest_hashes": {
+    "property_condition_manifest.csv": "1379651ed4e981c350a5f229797c4961abe6443122ef37f74dfe0b84f6a5bd65",
+    "spacenet_manifest.csv": "ab30ba4e2775e576a03e5b7a89b283779aa1291e22552f0d99b62284688b1494",
+    "spacenet_smoke_test_manifest.csv": "15368f71ab1db171668be9d287e15121c06d93aa7b9d08e2f720544adda4978a",
+    "spacenet_train_manifest.csv": "4e0d8e1b8c2df93f2dca1bb87adadfeb36770a8c961df06d777946dcc2bc8a99"
+  },
+  "processed_data_hashes": {
+    "housing_train_df.csv": "0675945e58d7b2cb7e869e73833e8a38dc1a5e4d6a823227c1bcbbb17cd84b14",
+    "housing_val_df.csv": "bb36c284e25105843bd8db6b3fd6657dabe1a13c5860cdece2cc0f214895af7e",
+    "housing_test_df.csv": "1bb7a29c7c4193d539a423c775fe3f6cc96d631d90c6d74867f74afb1e4d605e",
+    "housing_features.json": "abe5b0c3902592c2db1051076c0c4c51899e3130bdbabbbdaa103d1c44e5b70e",
+    "property_condition_splits.json": "57eda8821ce903319ab733faedea0e2e8cfb8e150dcb896c2225c27aaa74ea02",
+    "spacenet_train_splits.json": "c48ab357bffe19be8e90e2be3b152e83d9986a64e9d13de66716a1ddf5dc490a",
+    "zillow_zhvi_processed.csv": "530e06e28b0893e2e121e902772eb981d7f0d7ccc21b072dfd019349c80a2b61",
+    "forecasts_cache.csv": "ef97c3b161de7b011c3fa49ccdf0f7959302abf3b4b3cf3225acedb599f44643"
+  },
+  "verification_result": "ALL_PASS"
+}

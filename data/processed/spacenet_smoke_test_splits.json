@@ -1,0 +1,148 @@
+{
+  "train": [
+    {
+      "image_id": "vegas_1030",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1030.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1030_mask.png",
+      "num_buildings": 64,
+      "building_pixel_pct": 27.8222
+    },
+    {
+      "image_id": "vegas_1006",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1006.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1006_mask.png",
+      "num_buildings": 21,
+      "building_pixel_pct": 15.8885
+    },
+    {
+      "image_id": "vegas_1021",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1021.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1021_mask.png",
+      "num_buildings": 41,
+      "building_pixel_pct": 23.0154
+    },
+    {
+      "image_id": "vegas_1004",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1004.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1004_mask.png",
+      "num_buildings": 15,
+      "building_pixel_pct": 15.5877
+    },
+    {
+      "image_id": "vegas_1010",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1010.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1010_mask.png",
+      "num_buildings": 18,
+      "building_pixel_pct": 9.2653
+    },
+    {
+      "image_id": "vegas_1018",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1018.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1018_mask.png",
+      "num_buildings": 40,
+      "building_pixel_pct": 22.0424
+    },
+    {
+      "image_id": "vegas_1023",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1023.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1023_mask.png",
+      "num_buildings": 34,
+      "building_pixel_pct": 23.164
+    },
+    {
+      "image_id": "vegas_1029",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1029.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1029_mask.png",
+      "num_buildings": 42,
+      "building_pixel_pct": 21.3946
+    },
+    {
+      "image_id": "vegas_1007",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1007.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1007_mask.png",
+      "num_buildings": 34,
+      "building_pixel_pct": 20.0653
+    },
+    {
+      "image_id": "vegas_1017",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1017.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1017_mask.png",
+      "num_buildings": 39,
+      "building_pixel_pct": 19.9127
+    },
+    {
+      "image_id": "vegas_1028",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1028.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1028_mask.png",
+      "num_buildings": 10,
+      "building_pixel_pct": 5.8024
+    },
+    {
+      "image_id": "vegas_1015",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1015.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1015_mask.png",
+      "num_buildings": 41,
+      "building_pixel_pct": 26.7633
+    },
+    {
+      "image_id": "vegas_10",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_10.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_10_mask.png",
+      "num_buildings": 28,
+      "building_pixel_pct": 22.2488
+    },
+    {
+      "image_id": "vegas_1016",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1016.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1016_mask.png",
+      "num_buildings": 43,
+      "building_pixel_pct": 18.0436
+    }
+  ],
+  "val": [
+    {
+      "image_id": "vegas_1002",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1002.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1002_mask.png",
+      "num_buildings": 0,
+      "building_pixel_pct": 0.0
+    },
+    {
+      "image_id": "vegas_1025",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1025.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1025_mask.png",
+      "num_buildings": 29,
+      "building_pixel_pct": 11.577
+    },
+    {
+      "image_id": "vegas_1009",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1009.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1009_mask.png",
+      "num_buildings": 39,
+      "building_pixel_pct": 24.2327
+    }
+  ],
+  "test": [
+    {
+      "image_id": "vegas_101",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_101.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_101_mask.png",
+      "num_buildings": 31,
+      "building_pixel_pct": 19.9749
+    },
+    {
+      "image_id": "vegas_1",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1_mask.png",
+      "num_buildings": 15,
+      "building_pixel_pct": 4.9905
+    },
+    {
+      "image_id": "vegas_1003",
+      "image_path": "data/raw/spacenet/smoke_test/images/spacenet_vegas_chip_1003.png",
+      "mask_path": "data/raw/spacenet/smoke_test/masks/spacenet_vegas_chip_1003_mask.png",
+      "num_buildings": 9,
+      "building_pixel_pct": 11.0379
+    }
+  ]
+}

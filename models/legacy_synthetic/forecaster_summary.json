@@ -1,0 +1,129 @@
+{
+  "model_architecture": "Facebook Prophet (Trend + Yearly Seasonality + MCMC Change Points)",
+  "mean_mape_pct": 11.64,
+  "mean_rmse": 50626.61,
+  "metros_evaluated": 8,
+  "forecast_horizon_months": 36,
+  "metro_details": {
+    "Atlanta, GA": {
+      "test_months": 24,
+      "mae": 73637.1,
+      "rmse": 78046.23,
+      "mape_pct": 19.22,
+      "investor_metrics": {
+        "current_price": 377428.4,
+        "projected_price_3yr": 474892.93,
+        "projected_growth_3yr_pct": 25.82,
+        "annualized_cagr_pct": 7.96,
+        "annual_volatility_pct": 2.5,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A+ (Strong Buy / High Appreciation)"
+      }
+    },
+    "Austin, TX": {
+      "test_months": 24,
+      "mae": 143439.26,
+      "rmse": 148257.16,
+      "mape_pct": 32.86,
+      "investor_metrics": {
+        "current_price": 417976.86,
+        "projected_price_3yr": 475317.56,
+        "projected_growth_3yr_pct": 13.72,
+        "annualized_cagr_pct": 4.38,
+        "annual_volatility_pct": 2.83,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "B (Stable Cash-Flow Market)"
+      }
+    },
+    "Baltimore, MD": {
+      "test_months": 24,
+      "mae": 25022.6,
+      "rmse": 26815.13,
+      "mape_pct": 6.28,
+      "investor_metrics": {
+        "current_price": 400262.61,
+        "projected_price_3yr": 449694.3,
+        "projected_growth_3yr_pct": 12.35,
+        "annualized_cagr_pct": 3.96,
+        "annual_volatility_pct": 2.1,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "B (Stable Cash-Flow Market)"
+      }
+    },
+    "Boston, MA": {
+      "test_months": 24,
+      "mae": 38084.85,
+      "rmse": 42925.01,
+      "mape_pct": 5.24,
+      "investor_metrics": {
+        "current_price": 733574.17,
+        "projected_price_3yr": 855121.79,
+        "projected_growth_3yr_pct": 16.57,
+        "annualized_cagr_pct": 5.24,
+        "annual_volatility_pct": 1.96,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    },
+    "Charlotte, NC": {
+      "test_months": 24,
+      "mae": 65337.28,
+      "rmse": 68855.31,
+      "mape_pct": 16.86,
+      "investor_metrics": {
+        "current_price": 384458.2,
+        "projected_price_3yr": 480709.36,
+        "projected_growth_3yr_pct": 25.04,
+        "annualized_cagr_pct": 7.73,
+        "annual_volatility_pct": 1.93,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A+ (Strong Buy / High Appreciation)"
+      }
+    },
+    "Chicago, IL": {
+      "test_months": 24,
+      "mae": 7323.58,
+      "rmse": 7909.32,
+      "mape_pct": 2.12,
+      "investor_metrics": {
+        "current_price": 357264.94,
+        "projected_price_3yr": 406098.24,
+        "projected_growth_3yr_pct": 13.67,
+        "annualized_cagr_pct": 4.36,
+        "annual_volatility_pct": 2.04,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "B (Stable Cash-Flow Market)"
+      }
+    },
+    "Cincinnati, OH": {
+      "test_months": 24,
+      "mae": 22392.52,
+      "rmse": 23714.91,
+      "mape_pct": 7.38,
+      "investor_metrics": {
+        "current_price": 308426.23,
+        "projected_price_3yr": 360213.93,
+        "projected_growth_3yr_pct": 16.79,
+        "annualized_cagr_pct": 5.31,
+        "annual_volatility_pct": 1.5,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    },
+    "Cleveland, OH": {
+      "test_months": 24,
+      "mae": 7800.67,
+      "rmse": 8489.79,
+      "mape_pct": 3.16,
+      "investor_metrics": {
+        "current_price": 253677.84,
+        "projected_price_3yr": 297209.69,
+        "projected_growth_3yr_pct": 17.16,
+        "annualized_cagr_pct": 5.42,
+        "annual_volatility_pct": 1.58,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    }
+  }
+}

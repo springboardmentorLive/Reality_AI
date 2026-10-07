@@ -1,0 +1,228 @@
+{
+  "task": "Ames Housing Price Regression",
+  "version": "v1.0-real",
+  "target": "SalePrice (USD)",
+  "target_transform": "log1p during training, expm1 for prediction",
+  "seed": 42,
+  "sample_counts": {
+    "train": 1020,
+    "validation": 219,
+    "test": 219
+  },
+  "features_count": 27,
+  "features": [
+    "LotArea",
+    "OverallQual",
+    "OverallCond",
+    "YearBuilt",
+    "YearRemodAdd",
+    "TotalBsmtSF",
+    "1stFlrSF",
+    "2ndFlrSF",
+    "GrLivArea",
+    "FullBath",
+    "HalfBath",
+    "BedroomAbvGr",
+    "KitchenAbvGr",
+    "TotRmsAbvGrd",
+    "Fireplaces",
+    "GarageCars",
+    "GarageArea",
+    "WoodDeckSF",
+    "OpenPorchSF",
+    "Neighborhood",
+    "MSZoning",
+    "BldgType",
+    "HouseStyle",
+    "ExterQual",
+    "Foundation",
+    "BsmtQual",
+    "KitchenQual"
+  ],
+  "cross_validation_5fold": {
+    "xgboost_cv": {
+      "mean_rmse": 25294.2,
+      "std_rmse": 1920.01,
+      "mean_mae": 16280.77,
+      "std_mae": 424.72
+    },
+    "lightgbm_cv": {
+      "mean_rmse": 26629.09,
+      "std_rmse": 1407.57,
+      "mean_mae": 17053.02,
+      "std_mae": 753.94
+    }
+  },
+  "model_selection": {
+    "selected_model": "XGBoost",
+    "decision_rule": "Lowest Validation RMSE (evaluated strictly on X_val, test set untouched)",
+    "rationale": "XGBoost selected based on superior validation RMSE ($25,667.70 vs $25,669.62 for LightGBM)."
+  },
+  "validation_evaluation": {
+    "xgboost": {
+      "model_name": "XGBOOST",
+      "mae": 15767.26,
+      "rmse": 25667.7,
+      "r2_score": 0.8803,
+      "mape_pct": 8.92
+    },
+    "lightgbm": {
+      "model_name": "LIGHTGBM",
+      "mae": 15819.01,
+      "rmse": 25669.62,
+      "r2_score": 0.8803,
+      "mape_pct": 9.07
+    }
+  },
+  "final_heldout_test_evaluation": {
+    "xgboost": {
+      "model_name": "XGBOOST",
+      "mae": 15092.41,
+      "rmse": 22203.78,
+      "r2_score": 0.9103,
+      "mape_pct": 9.17
+    },
+    "lightgbm": {
+      "model_name": "LIGHTGBM",
+      "mae": 15227.48,
+      "rmse": 22498.19,
+      "r2_score": 0.9079,
+      "mape_pct": 9.33
+    }
+  },
+  "uncertainty_quantification": {
+    "methodology": "5-Fold Out-of-Fold Residual Calibration (Cross-Conformal Construction; Vovk 2015; Barber et al. 2021)",
+    "nonconformity_score": "Relative absolute error |y - yhat| / yhat",
+    "calibration_set": "Out-of-fold residuals on X_train (N=1020 properties). Strictly independent of model selection partition X_val (N=219) and held-out test partition X_test (N=219).",
+    "target_coverage_pct": 90.0,
+    "calibrated_relative_margin_pct": 19.59,
+    "test_empirical_coverage_pct": 92.24,
+    "formula": "[yhat * (1 - margin), yhat * (1 + margin)]"
+  },
+  "feature_importance": {
+    "importance_type": "Gain (relative contribution of each feature to the model)",
+    "model": "XGBoost",
+    "rankings": [
+      {
+        "feature": "OverallQual",
+        "importance": 0.3088
+      },
+      {
+        "feature": "ExterQual",
+        "importance": 0.1157
+      },
+      {
+        "feature": "GarageCars",
+        "importance": 0.0969
+      },
+      {
+        "feature": "GrLivArea",
+        "importance": 0.0606
+      },
+      {
+        "feature": "BsmtQual",
+        "importance": 0.0541
+      },
+      {
+        "feature": "Fireplaces",
+        "importance": 0.0536
+      },
+      {
+        "feature": "YearBuilt",
+        "importance": 0.038
+      },
+      {
+        "feature": "KitchenAbvGr",
+        "importance": 0.0321
+      },
+      {
+        "feature": "FullBath",
+        "importance": 0.0291
+      },
+      {
+        "feature": "TotalBsmtSF",
+        "importance": 0.0237
+      },
+      {
+        "feature": "GarageArea",
+        "importance": 0.021
+      },
+      {
+        "feature": "2ndFlrSF",
+        "importance": 0.0199
+      },
+      {
+        "feature": "MSZoning",
+        "importance": 0.0183
+      },
+      {
+        "feature": "1stFlrSF",
+        "importance": 0.0173
+      },
+      {
+        "feature": "KitchenQual",
+        "importance": 0.0166
+      },
+      {
+        "feature": "YearRemodAdd",
+        "importance": 0.0155
+      },
+      {
+        "feature": "OverallCond",
+        "importance": 0.0118
+      },
+      {
+        "feature": "TotRmsAbvGrd",
+        "importance": 0.0112
+      },
+      {
+        "feature": "BldgType",
+        "importance": 0.0107
+      },
+      {
+        "feature": "LotArea",
+        "importance": 0.0075
+      },
+      {
+        "feature": "HouseStyle",
+        "importance": 0.0075
+      },
+      {
+        "feature": "HalfBath",
+        "importance": 0.0069
+      },
+      {
+        "feature": "Neighborhood",
+        "importance": 0.0061
+      },
+      {
+        "feature": "WoodDeckSF",
+        "importance": 0.0052
+      },
+      {
+        "feature": "OpenPorchSF",
+        "importance": 0.0049
+      },
+      {
+        "feature": "BedroomAbvGr",
+        "importance": 0.0041
+      },
+      {
+        "feature": "Foundation",
+        "importance": 0.0027
+      }
+    ]
+  },
+  "environment": {
+    "python": "3.13.14",
+    "xgboost": "3.1.3",
+    "lightgbm": "4.7.0",
+    "sklearn": "1.8.0",
+    "os": "Windows-11-10.0.26300-SP0"
+  },
+  "artifacts": {
+    "xgboost_checkpoint": "models/saved/xgboost_ames_v1.pkl",
+    "lightgbm_checkpoint": "models/saved/lightgbm_ames_v1.pkl",
+    "preprocessor": "data/processed/housing_preprocessor.pkl"
+  }
+}

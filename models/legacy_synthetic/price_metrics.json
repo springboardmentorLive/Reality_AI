@@ -1,0 +1,68 @@
+{
+  "best_model": "XGBoost",
+  "xgboost": {
+    "model_name": "XGBOOST",
+    "mae": 15092.41,
+    "rmse": 22203.78,
+    "r2_score": 0.9103,
+    "mape_pct": 9.17
+  },
+  "lightgbm": {
+    "model_name": "LIGHTGBM",
+    "mae": 15227.48,
+    "rmse": 22498.19,
+    "r2_score": 0.9079,
+    "mape_pct": 9.33
+  },
+  "top_features": [
+    {
+      "feature": "OverallQual",
+      "importance": 0.3088
+    },
+    {
+      "feature": "ExterQual",
+      "importance": 0.1157
+    },
+    {
+      "feature": "GarageCars",
+      "importance": 0.0969
+    },
+    {
+      "feature": "GrLivArea",
+      "importance": 0.0606
+    },
+    {
+      "feature": "BsmtQual",
+      "importance": 0.0541
+    },
+    {
+      "feature": "Fireplaces",
+      "importance": 0.0536
+    },
+    {
+      "feature": "YearBuilt",
+      "importance": 0.038
+    },
+    {
+      "feature": "KitchenAbvGr",
+      "importance": 0.0321
+    },
+    {
+      "feature": "FullBath",
+      "importance": 0.0291
+    },
+    {
+      "feature": "TotalBsmtSF",
+      "importance": 0.0237
+    },
+    {
+      "feature": "GarageArea",
+      "importance": 0.021
+    },
+    {
+      "feature": "2ndFlrSF",
+      "importance": 0.0199
+    }
+  ],
+  "test_sample_size": 219
+}

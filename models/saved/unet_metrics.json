@@ -1,0 +1,147 @@
+{
+  "model_name": "SpaceNet 2 Building Footprint U-Net",
+  "version": "v1.0-real",
+  "task": "Building footprint binary segmentation",
+  "architecture": "PyTorch U-Net (DoubleConv + Skip Connections)",
+  "features": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "loss_function": "BCEDiceLoss (50% BCE + 50% Dice, smooth=1.0)",
+  "optimizer": "AdamW (lr=0.001, weight_decay=1e-4, CosineAnnealingLR)",
+  "seed": 42,
+  "evaluation_partition": "validation_heldout",
+  "official_public_test_status": "Development evaluation performed on held-out validation chips; official public test labels unavailable locally.",
+  "threshold": 0.5,
+  "num_evaluated_chips": 6,
+  "aggregate_metrics": {
+    "mean_iou": 0.3593,
+    "median_iou": 0.3206,
+    "std_iou": 0.1905,
+    "mean_dice": 0.4985,
+    "median_dice": 0.4854,
+    "std_dice": 0.2177,
+    "mean_precision": 0.7142,
+    "mean_recall": 0.4334
+  },
+  "per_chip_distribution": [
+    {
+      "chip_id": "vegas_1041",
+      "iou": 0.3152,
+      "dice": 0.4793,
+      "precision": 0.5736,
+      "recall": 0.4117
+    },
+    {
+      "chip_id": "vegas_1042",
+      "iou": 0.3259,
+      "dice": 0.4915,
+      "precision": 0.6937,
+      "recall": 0.3806
+    },
+    {
+      "chip_id": "vegas_1047",
+      "iou": 0.0537,
+      "dice": 0.1019,
+      "precision": 0.607,
+      "recall": 0.0556
+    },
+    {
+      "chip_id": "vegas_1048",
+      "iou": 0.5366,
+      "dice": 0.6984,
+      "precision": 0.7631,
+      "recall": 0.6439
+    },
+    {
+      "chip_id": "vegas_1049",
+      "iou": 0.6474,
+      "dice": 0.786,
+      "precision": 0.753,
+      "recall": 0.822
+    },
+    {
+      "chip_id": "vegas_1051",
+      "iou": 0.2772,
+      "dice": 0.4341,
+      "precision": 0.8945,
+      "recall": 0.2866
+    }
+  ],
+  "error_analysis_panels": [
+    "models/saved/unet_error_analysis/vegas_1041_error_analysis.png",
+    "models/saved/unet_error_analysis/vegas_1042_error_analysis.png",
+    "models/saved/unet_error_analysis/vegas_1047_error_analysis.png",
+    "models/saved/unet_error_analysis/vegas_1048_error_analysis.png",
+    "models/saved/unet_error_analysis/vegas_1049_error_analysis.png",
+    "models/saved/unet_error_analysis/vegas_1051_error_analysis.png"
+  ],
+  "history": {
+    "train_loss": [
+      0.6722,
+      0.5994,
+      0.5628,
+      0.5385,
+      0.5312,
+      0.5018,
+      0.4937,
+      0.4893,
+      0.4798,
+      0.4876,
+      0.476,
+      0.4718
+    ],
+    "val_loss": [
+      0.6489,
+      0.6226,
+      0.6016,
+      0.671,
+      0.65,
+      0.6005,
+      0.5351,
+      0.5303,
+      0.5232,
+      0.5209,
+      0.5224,
+      0.5253
+    ],
+    "val_iou": [
+      0.0367,
+      0.0727,
+      0.0807,
+      0.0759,
+      0.0447,
+      0.1792,
+      0.3334,
+      0.3442,
+      0.3543,
+      0.3593,
+      0.3539,
+      0.3511
+    ],
+    "val_dice": [
+      0.0661,
+      0.1221,
+      0.1357,
+      0.1261,
+      0.0779,
+      0.2756,
+      0.4701,
+      0.4819,
+      0.4941,
+      0.4985,
+      0.4927,
+      0.4883
+    ]
+  },
+  "environment": {
+    "python": "3.13.14",
+    "torch": "2.9.1+cpu",
+    "device": "cpu",
+    "os": "Windows-11-10.0.26300-SP0"
+  },
+  "checkpoint_path": "models/saved/unet_spacenet_v1.pt",
+  "dataset_manifest": "data/manifests/spacenet_train_manifest.csv"
+}

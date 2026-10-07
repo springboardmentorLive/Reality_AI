@@ -1,0 +1,125 @@
+{
+  "model_name": "PEER PHI-Net ResNet-18 Collapse Mode Classifier",
+  "version": "v1.0-real",
+  "task": "Structural Condition & Integrity Assessment \u2014 Collapse Mode",
+  "classes": [
+    "global_collapse",
+    "non_collapse",
+    "partial_collapse"
+  ],
+  "architecture": "ResNet-18 (ImageNet Pretrained Backbone + Dropout MLP Head)",
+  "pretrained_weights": "ResNet18_Weights.DEFAULT (ImageNet-1K)",
+  "loss_function": "Weighted CrossEntropyLoss (Class Weights calculated on train split only)",
+  "train_class_weights": {
+    "0": 0.7788,
+    "1": 1.2676,
+    "2": 1.0787
+  },
+  "optimizer": "AdamW (lr=0.0003, weight_decay=1e-4, CosineAnnealingLR)",
+  "seed": 42,
+  "sample_counts": {
+    "train": 1042,
+    "validation": 184,
+    "benchmark_test": 146
+  },
+  "best_val_macro_f1": 0.7294,
+  "benchmark_test_evaluation": {
+    "accuracy": 0.7055,
+    "macro_precision": 0.6886,
+    "macro_recall": 0.6651,
+    "macro_f1": 0.6721,
+    "weighted_precision": 0.7008,
+    "weighted_recall": 0.7055,
+    "weighted_f1": 0.6984,
+    "confusion_matrix": [
+      [
+        59,
+        1,
+        7
+      ],
+      [
+        7,
+        23,
+        9
+      ],
+      [
+        12,
+        7,
+        21
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "global_collapse",
+      "non_collapse",
+      "partial_collapse"
+    ],
+    "per_class_breakdown": {
+      "global_collapse": {
+        "class_id": 0,
+        "description": "Global Collapse (Severe Damage)",
+        "precision": 0.7564,
+        "recall": 0.8806,
+        "f1_score": 0.8138,
+        "support": 67
+      },
+      "non_collapse": {
+        "class_id": 1,
+        "description": "Non-Collapse (Sound Structure)",
+        "precision": 0.7419,
+        "recall": 0.5897,
+        "f1_score": 0.6571,
+        "support": 39
+      },
+      "partial_collapse": {
+        "class_id": 2,
+        "description": "Partial Collapse (Moderate Damage)",
+        "precision": 0.5676,
+        "recall": 0.525,
+        "f1_score": 0.5455,
+        "support": 40
+      }
+    }
+  },
+  "history": {
+    "train_loss": [
+      0.8435,
+      0.5894,
+      0.4419,
+      0.3161,
+      0.2149,
+      0.1668
+    ],
+    "val_loss": [
+      0.6842,
+      0.8537,
+      0.6535,
+      0.8608,
+      0.7349,
+      0.7307
+    ],
+    "val_macro_f1": [
+      0.6857,
+      0.6103,
+      0.7294,
+      0.6586,
+      0.7053,
+      0.688
+    ],
+    "val_acc": [
+      0.6957,
+      0.6304,
+      0.7337,
+      0.6576,
+      0.712,
+      0.6957
+    ]
+  },
+  "environment": {
+    "python": "3.13.14",
+    "torch": "2.9.1+cpu",
+    "device": "cpu",
+    "os": "Windows-11-10.0.26300-SP0"
+  },
+  "checkpoint_path": "models/saved/resnet_peer_collapse_v1.pt",
+  "dataset_manifest": "data/manifests/property_condition_manifest.csv"
+}

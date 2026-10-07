@@ -1,0 +1,448 @@
+{
+  "task": "Zillow ZHVI Regional Housing Trend Forecasting",
+  "version": "v1.0-real",
+  "methodology": "Facebook Prophet (Additive Trend + Yearly Seasonality + Bayesian Uncertainty)",
+  "model_decision": {
+    "selected_model": "Prophet-only",
+    "omitted_model": "RealEstateLSTM (Untrained / unverified for production; documented as experimental prototype)",
+    "rationale": "Dataset size (264 monthly observations per metro) is optimal for Bayesian structural time-series decomposition. Deep LSTM on short monthly series suffers from high variance and poor generalizability without cross-series pretraining."
+  },
+  "metro_selection_rule": {
+    "filter": "RegionType == 'msa'",
+    "ordering": "SizeRank ascending (1 to 10)",
+    "justification": "Focuses on the top 10 primary US metropolitan statistical areas representing ~30% of total national residential real estate transaction volume.",
+    "selected_metros": [
+      "New York, NY",
+      "Los Angeles, CA",
+      "Chicago, IL",
+      "Dallas, TX",
+      "Houston, TX",
+      "Washington, DC",
+      "Philadelphia, PA",
+      "Miami, FL",
+      "Atlanta, GA",
+      "Boston, MA"
+    ]
+  },
+  "temporal_evaluation_protocol": {
+    "leakage_protection": "Strict chronological forward-chaining split; no shuffling; past-to-future projection only",
+    "training_period": "2000-01-31 to 2021-12-31 (264 monthly snapshots)",
+    "validation_period": "2022-01-31 to 2023-12-31 (24 monthly snapshots)",
+    "held_out_test_period": "2024-01-31 to 2026-08-31 (32 monthly snapshots)"
+  },
+  "forecast_uncertainty": {
+    "methodology": "Prophet Bayesian posterior predictive interval",
+    "configured_width": 0.95,
+    "definition": "95% forecast interval representing parameter and residual variance under Prophet prior specifications; not frequentist asymptotic confidence intervals.",
+    "empirical_test_coverage_pct": 40.31
+  },
+  "validation_aggregate_metrics": {
+    "mean_mae": 39940.93,
+    "mean_rmse": 41688.19,
+    "mean_mape_pct": 8.86
+  },
+  "final_heldout_test_aggregate_metrics": {
+    "mean_mae": 39580.75,
+    "mean_rmse": 45888.3,
+    "mean_mape_pct": 8.71,
+    "mean_95pct_interval_coverage": 40.31
+  },
+  "forecast_horizon_months": 36,
+  "metros_evaluated_count": 10,
+  "metro_evaluations": {
+    "New York, NY": {
+      "size_rank": 1,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 28733.75,
+        "rmse": 29732.43,
+        "mape_pct": 4.62
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 4027.28,
+        "rmse": 4469.74,
+        "mape_pct": 0.58,
+        "forecast_interval_coverage_95_pct": 100.0
+      },
+      "investor_metrics": {
+        "current_price": 735075.47,
+        "projected_price_3yr": 834556.23,
+        "projected_growth_3yr_pct": 13.53,
+        "annualized_cagr_pct": 4.32,
+        "annual_volatility_pct": 1.84,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "B (Stable Cash-Flow Market)"
+      }
+    },
+    "Los Angeles, CA": {
+      "size_rank": 2,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 57138.44,
+        "rmse": 63828.55,
+        "mape_pct": 6.45
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 64989.54,
+        "rmse": 77405.7,
+        "mape_pct": 6.84,
+        "forecast_interval_coverage_95_pct": 46.88
+      },
+      "investor_metrics": {
+        "current_price": 952601.25,
+        "projected_price_3yr": 1128612.86,
+        "projected_growth_3yr_pct": 18.48,
+        "annualized_cagr_pct": 5.81,
+        "annual_volatility_pct": 3.48,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    },
+    "Chicago, IL": {
+      "size_rank": 3,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 19595.3,
+        "rmse": 19999.46,
+        "mape_pct": 6.44
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 3678.54,
+        "rmse": 4567.49,
+        "mape_pct": 1.07,
+        "forecast_interval_coverage_95_pct": 100.0
+      },
+      "investor_metrics": {
+        "current_price": 357264.94,
+        "projected_price_3yr": 406098.24,
+        "projected_growth_3yr_pct": 13.67,
+        "annualized_cagr_pct": 4.36,
+        "annual_volatility_pct": 2.04,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "B (Stable Cash-Flow Market)"
+      }
+    },
+    "Dallas, TX": {
+      "size_rank": 4,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 50411.61,
+        "rmse": 51889.42,
+        "mape_pct": 13.19
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 71354.19,
+        "rmse": 78702.52,
+        "mape_pct": 19.26,
+        "forecast_interval_coverage_95_pct": 0.0
+      },
+      "investor_metrics": {
+        "current_price": 360436.82,
+        "projected_price_3yr": 443352.36,
+        "projected_growth_3yr_pct": 23.0,
+        "annualized_cagr_pct": 7.15,
+        "annual_volatility_pct": 2.02,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A+ (Strong Buy / High Appreciation)"
+      }
+    },
+    "Houston, TX": {
+      "size_rank": 5,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 36757.07,
+        "rmse": 37514.97,
+        "mape_pct": 11.74
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 48395.38,
+        "rmse": 53093.9,
+        "mape_pct": 15.56,
+        "forecast_interval_coverage_95_pct": 0.0
+      },
+      "investor_metrics": {
+        "current_price": 305001.46,
+        "projected_price_3yr": 367219.67,
+        "projected_growth_3yr_pct": 20.4,
+        "annualized_cagr_pct": 6.38,
+        "annual_volatility_pct": 1.63,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    },
+    "Washington, DC": {
+      "size_rank": 6,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 19097.15,
+        "rmse": 21857.04,
+        "mape_pct": 3.55
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 38943.64,
+        "rmse": 43551.16,
+        "mape_pct": 6.81,
+        "forecast_interval_coverage_95_pct": 53.12
+      },
+      "investor_metrics": {
+        "current_price": 573335.66,
+        "projected_price_3yr": 640111.09,
+        "projected_growth_3yr_pct": 11.65,
+        "annualized_cagr_pct": 3.74,
+        "annual_volatility_pct": 2.47,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "B (Stable Cash-Flow Market)"
+      }
+    },
+    "Philadelphia, PA": {
+      "size_rank": 7,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 23132.01,
+        "rmse": 23498.53,
+        "mape_pct": 6.86
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 16218.98,
+        "rmse": 19115.44,
+        "mape_pct": 4.26,
+        "forecast_interval_coverage_95_pct": 21.88
+      },
+      "investor_metrics": {
+        "current_price": 389523.61,
+        "projected_price_3yr": 455816.37,
+        "projected_growth_3yr_pct": 17.02,
+        "annualized_cagr_pct": 5.38,
+        "annual_volatility_pct": 1.79,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    },
+    "Miami, FL": {
+      "size_rank": 8,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 79131.24,
+        "rmse": 80437.91,
+        "mape_pct": 17.28
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 57458.82,
+        "rmse": 71450.84,
+        "mape_pct": 12.0,
+        "forecast_interval_coverage_95_pct": 31.25
+      },
+      "investor_metrics": {
+        "current_price": 475829.63,
+        "projected_price_3yr": 626544.95,
+        "projected_growth_3yr_pct": 31.67,
+        "annualized_cagr_pct": 9.61,
+        "annual_volatility_pct": 3.65,
+        "risk_tier": "Moderate Volatility (Balanced Growth)",
+        "opportunity_rating": "A+ (Strong Buy / High Appreciation)"
+      }
+    },
+    "Atlanta, GA": {
+      "size_rank": 9,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 48461.4,
+        "rmse": 49397.4,
+        "mape_pct": 12.8
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 66764.36,
+        "rmse": 74767.51,
+        "mape_pct": 17.38,
+        "forecast_interval_coverage_95_pct": 0.0
+      },
+      "investor_metrics": {
+        "current_price": 377428.4,
+        "projected_price_3yr": 474892.93,
+        "projected_growth_3yr_pct": 25.82,
+        "annualized_cagr_pct": 7.96,
+        "annual_volatility_pct": 2.5,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A+ (Strong Buy / High Appreciation)"
+      }
+    },
+    "Boston, MA": {
+      "size_rank": 10,
+      "temporal_splits": {
+        "training_interval": [
+          "2000-01-31",
+          "2021-12-31"
+        ],
+        "validation_interval": [
+          "2022-01-31",
+          "2023-12-31"
+        ],
+        "test_interval": [
+          "2024-01-31",
+          "2026-08-31"
+        ]
+      },
+      "validation_metrics": {
+        "months": 24,
+        "mae": 36951.37,
+        "rmse": 38726.21,
+        "mape_pct": 5.7
+      },
+      "test_metrics": {
+        "months": 32,
+        "mae": 23976.8,
+        "rmse": 31758.72,
+        "mape_pct": 3.3,
+        "forecast_interval_coverage_95_pct": 50.0
+      },
+      "investor_metrics": {
+        "current_price": 733574.17,
+        "projected_price_3yr": 855121.79,
+        "projected_growth_3yr_pct": 16.57,
+        "annualized_cagr_pct": 5.24,
+        "annual_volatility_pct": 1.96,
+        "risk_tier": "Low Volatility (Defensive Market)",
+        "opportunity_rating": "A (Favorable Long-Term Growth)"
+      }
+    }
+  },
+  "environment": {
+    "python": "3.13.14",
+    "os": "Windows-11-10.0.26300-SP0"
+  }
+}

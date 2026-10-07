@@ -1,0 +1,32 @@
+{
+  "dataset_statistics": {
+    "housing_records": 1458,
+    "housing_features_count": 81,
+    "housing_avg_price": 180932.91906721535,
+    "housing_median_price": 163000.0,
+    "housing_min_price": 34900.0,
+    "housing_max_price": 755000.0,
+    "zillow_total_metros": 35,
+    "zillow_highest_zhvi_metro": "San Francisco, CA",
+    "zillow_highest_zhvi_value": 1123192.99,
+    "spacenet_tiles_count": 30,
+    "condition_images_count": 1372
+  },
+  "housing_price_percentiles": {
+    "p10": 106425.0,
+    "p25": 129925.0,
+    "p50": 163000.0,
+    "p75": 214000.0,
+    "p90": 278000.0
+  },
+  "top_neighborhoods": {
+    "NAmes": 225,
+    "CollgCr": 150,
+    "OldTown": 113,
+    "Edwards": 98,
+    "Somerst": 86,
+    "Gilbert": 79,
+    "NridgHt": 77,
+    "Sawyer": 74
+  }
+}

@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing and profiling caches
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables and credentials
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+
+# Operating System metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE and Editor metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary and backup archives
+*.zip
+*.tar
+*.tar.gz
+
+# Large raw datasets exceeding GitHub limit (100 MB hard limit)
+# Note: Reconstituted image splits (1,372 images, 31.2 MB) in data/raw/property_conditions/{train,val,test}/ are preserved.
+# The 738 MB uncompressed numpy array task5_X_train.npy exceeds GitHub single-file limits.
+data/raw/property_conditions/raw_phi_net/task5_X_train.npy
+data/raw/property_conditions/raw_phi_net/task5_X_test.npy

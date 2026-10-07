@@ -1,0 +1,46 @@
+MIT License
+
+Copyright (c) 2026 RealtyAI Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+THIRD-PARTY DATASETS & RESEARCH ATTRIBUTION NOTICE
+================================================================================
+The Software incorporates and trains on third-party research datasets which retain
+their respective upstream licenses, terms of use, and academic restrictions:
+
+1. SpaceNet 2 Building Footprint Dataset:
+   - License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+   - Source: SpaceNet LLC / Maxar Technologies
+
+2. PEER Hub ImageNet (PHI-Net) Task 5 Dataset:
+   - License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+   - Commercial Restrictions: Strictly non-commercial academic research.
+   - Source: Pacific Earthquake Engineering Research (PEER) Center, UC Berkeley
+
+3. Ames Housing Dataset:
+   - License: Open Academic / Educational Use (Journal of Statistics Education, 2011)
+   - Source: Prof. Dean De Cock, Truman State University
+
+4. Zillow Home Value Index (ZHVI):
+   - Terms: Zillow Terms of Use for Public Research Data
+   - Source: Zillow Group, Inc. (Zillow Research)
+
+For full licensing details, citations, and provenance records, see docs/DATA_PROVENANCE.md.
